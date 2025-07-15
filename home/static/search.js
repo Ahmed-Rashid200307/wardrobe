@@ -21,7 +21,7 @@ async function get_from_db(url, param){
   params.append("q", param)
   
   const res = await fetch(url+params,{
-      method: "GET"
+      method: "GET",
   })
   
   const text = await res.text();

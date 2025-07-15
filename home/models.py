@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -9,10 +10,12 @@ class Category(models.Model):
     verbose_name_plural = "Categories"
 
   name = models.CharField(max_length=30)
-  code = models.IntegerField()
+  code = models.IntegerField(unique=True)
 
   def __str__(self):
     return self.name
+
+###Each category dress
 
 class Dress(models.Model):
 
@@ -43,19 +46,37 @@ class Dress(models.Model):
   composition = models.CharField(max_length=30)
   stock = models.IntegerField(null=True)
   inStock = models.BooleanField()
-  code = models.IntegerField()
+  code = models.IntegerField(unique=True)
   description = models.TextField()
+  default_image = models.ImageField(unique=True,upload_to="images/default",blank=True)
+
+  def collision(self):
+     if Variant.objects.filter(image = self.default_image).exists():
+        raise ValidationError({"image":"Image already selected for varient image.\nPlease select a different image."})
+     
 
   def save(self, *args, **kwargs):
+            self.collision()
             self.inStock = (self.stock != 0)
             super().save(*args, **kwargs)
 
   def __str__(self):
     return self.name
+  
+###Variants for each dress
 
 class Variant(models.Model):
   dress = models.ForeignKey(Dress, models.CASCADE)
-  image = models.ImageField(upload_to="images/variants")
+  image = models.ImageField(upload_to="images/variants",blank=True)
+
+  def collision(self):
+    if Variant.objects.filter(image = self.default_image).exists():
+      raise ValidationError({"image":"Image already selected for default image.\nPlease select a different image."})
 
   def __str__(self):
     return self.dress.name+"_" + str(self.id)
+  
+  def save(self, *args, **kwargs):
+          self.collision()
+          self.inStock = (self.stock != 0)
+          super().save(*args, **kwargs)
