@@ -8,6 +8,7 @@ class VarInline(admin.StackedInline):
 
 class DressAdmin(admin.ModelAdmin):
     inlines = [VarInline]
+    
 # Register your models here.
 admin.site.register(Category)
 admin.site.register(Dress, DressAdmin)

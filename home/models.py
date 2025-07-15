@@ -52,7 +52,7 @@ class Dress(models.Model):
 
   def collision(self):
      if Variant.objects.filter(image = self.default_image).exists():
-        raise ValidationError({"image":"Image already selected for varient image.\nPlease select a different image."})
+        raise ValidationError({"image":"Image already selected for variant image.\nPlease select a different image."})
      
 
   def save(self, *args, **kwargs):
@@ -70,7 +70,7 @@ class Variant(models.Model):
   image = models.ImageField(upload_to="images/variants",blank=True)
 
   def collision(self):
-    if Variant.objects.filter(image = self.default_image).exists():
+    if Dress.objects.filter(default_image = self.image).exists():
       raise ValidationError({"image":"Image already selected for default image.\nPlease select a different image."})
 
   def __str__(self):
@@ -78,5 +78,4 @@ class Variant(models.Model):
   
   def save(self, *args, **kwargs):
           self.collision()
-          self.inStock = (self.stock != 0)
           super().save(*args, **kwargs)
