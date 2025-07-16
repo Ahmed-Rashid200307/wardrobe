@@ -5,7 +5,7 @@ from .models import Category,Dress,Variant
 def index(request):
   cat = Category.objects.all()
   dresses = Dress.objects.all()
-  print(request.headers)
+  
 
   context = {'category': cat,
              'dresses': dresses}
