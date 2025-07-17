@@ -1,12 +1,12 @@
 
-
 {% extends 'home/base.html' %}
 
+{% load static %}
 {% block content %}
 <div class="card-group">
   {% for dress in dresses %}
   <div class="card">
-    <img class="card-img-top" src='..{{ dress.default_image.url }}'>
+    <img class="card-img-top" src='{{dress.default_image}}'>
     <div class="card-body">
       <h5 class="card-title">{{ dress.name }}</h5>
       <p class="card-text">{{dress.description}}</p>
