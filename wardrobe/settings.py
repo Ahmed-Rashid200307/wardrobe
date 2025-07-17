@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 #   myapps
     'home',
     'user',
+    'transact',
 
     'django.contrib.admin',
     'django.contrib.auth',
