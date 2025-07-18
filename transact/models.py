@@ -1,41 +1,26 @@
 from django.db import models
 from home.models import Dress
 from datetime import datetime
+from django.contrib.auth.models import UserManager
+UserManager
 # Create your models here.
-
-# MODEL FOR EACH ITEM IN A ORDER
-class OrderItem(models.Model):
     
-    ordered = models.BooleanField(default=False)
-    item = models.ForeignKey(Dress, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.item.name
-    
-    def increment(self,by=1):
-        self.quantity += by
-        self.save()
-    def decrement(self,by=1):
-        self.quantity -= by
-        self.save()
+# class cart(models.Model):
 
-    def item_amount(self):
-        return self.quantity * self.item.price
 
-# MODEL FOR EACH ORDER(MAY CONTAIN MOANY ITEMS)
+# MODEL FOR EACH ORDER(MAY CONTAIN MANY ITEMS)
 class Order(models.Model):
-    
-    items = models.ManyToManyField(OrderItem)
+
     ref_code = models.CharField(max_length=20)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-    shipping_address = models.ForeignKey(
-        'ShippingAddress', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
-    payment = models.ForeignKey(
-        'Payment', on_delete=models.SET_NULL, blank=True, null=True)
-    coupon = models.ForeignKey(
-    'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
+    # shipping_address = models.OneToOneField(
+    #     ShippingAddress, on_delete=models.SET_NULL, null=True)
+    # payment = models.ForeignKey(
+    #     'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    # coupon = models.ForeignKey(
+    # 'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
@@ -70,9 +55,31 @@ class Order(models.Model):
           self.total_amount = self.get_total_amount()
         return super().save(*args,**kwargs)
     
+# MODEL FOR EACH ITEM IN A ORDER
+class OrderItem(models.Model):
+    
+    ordered = models.BooleanField(default=False)
+    item = models.ForeignKey(Dress, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.item.name
+    
+    def increment(self,by=1):
+        self.quantity += by
+        self.save()
+    def decrement(self,by=1):
+        self.quantity -= by
+        self.save()
+
+    def item_amount(self):
+        return self.quantity * self.item.price
+
 # MODEL FOR ALL DATA OF SHIPPING ADDRESS    
 class ShippingAddress(models.Model):
 
+    order = models.ForeignKey(Order,on_delete=models.DO_NOTHING)
     house_no = models.CharField(max_length=20)
     block = models.CharField(max_length=20)
     area = models.CharField(max_length=20)
@@ -85,7 +92,6 @@ class ShippingAddress(models.Model):
 
     class Meta:
       verbose_name_plural = 'Shipping Addresses'
-
 
 # MODEL FOR DATA OF PAYMENT
 class Payment(models.Model):
@@ -100,6 +106,7 @@ class Payment(models.Model):
         YEAR_CHOICES = {year+i: year+i for i in range(0,40) }        
         super().__init__(*args, **kwargs)
 
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     card_number = models.IntegerField()
     card_holder_name = models.CharField(max_length=40)
     expiration_month = models.CharField(choices=MONTH_CHOICES)
@@ -108,8 +115,9 @@ class Payment(models.Model):
     
 # MODEL FOR COUPON IF ANY
 class Coupon(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE,blank=True)
     code = models.CharField(max_length=15)
     amount = models.FloatField()
-
+    
     def __str__(self):
         return self.code
