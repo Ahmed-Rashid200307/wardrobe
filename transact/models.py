@@ -100,16 +100,12 @@ class Payment(models.Model):
 
     MONTH_CHOICES = [(JANUARY, 'January'), (FEBRUARY, 'February'), (MARCH, 'March'), (APRIL, 'April'), (MAY, 'May'), (JUNE, 'June'), (JULY, 'July'), (AUGUST, 'August'), (SEPTEMBER, 'September'), (OCTOBER, 'October'), (NOVEMBER, 'November'), (DECEMBER, 'December')]
     
-    YEAR_CHOICES = {}
-    def __init__(self, *args, **kwargs):
-        year = datetime.now().year
-        YEAR_CHOICES = {year+i: year+i for i in range(0,40) }        
-        super().__init__(*args, **kwargs)
+    YEAR_CHOICES = [(datetime.now().year+i, datetime.now().year+i) for i in range(0,35)]
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     card_number = models.IntegerField()
     card_holder_name = models.CharField(max_length=40)
-    expiration_month = models.CharField(choices=MONTH_CHOICES)
+    expiration_month = models.CharField(choices=MONTH_CHOICES, max_length=9)
     expiration_year = models.IntegerField(choices=YEAR_CHOICES)
     security_code = models.IntegerField()
     

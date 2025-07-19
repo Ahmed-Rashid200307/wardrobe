@@ -33,15 +33,15 @@ class Dress(models.Model):
   Extra_Extra_Large = "XXL"
   
   choices = {
-    Extra_Small:"Extra Small",
-    Small:"Small",
-    Medium:"Medium",
-    Large:"Large",
-    Extra_Large:"Extra Large",
-    Extra_Extra_Large:"Extra Extra Large",
+    (Extra_Small,"Extra Small"),
+    (Small,"Small"),
+    (Medium,"Medium"),
+    (Large,"Large"),
+    (Extra_Large,"Extra Large"),
+    (Extra_Extra_Large,"Extra Extra Large"),
   }
 
-  size = models.CharField(choices=choices, default=Medium)
+  size = models.CharField(choices=choices, default=Medium, max_length=4)
   price = models.IntegerField()
   composition = models.CharField(max_length=30)
   stock = models.IntegerField(null=True)
