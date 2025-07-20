@@ -5,7 +5,7 @@ app_name = 'home'
 
 urlpatterns = [
   path('', views.index, name='index'),
-  path('images/<str:type>/<str:name>/', views.ImageView.as_view(), name='index'),
+  path('images/<str:type>/<str:name>/', views.ImageView.as_view(), name='images'),
   path('home/category/<str:cat_id>', views.category, name='category'),
   path('home/search/', views.search, name='search'),
 ]

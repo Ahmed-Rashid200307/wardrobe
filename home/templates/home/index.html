@@ -1,18 +1,18 @@
 
-{% extends 'home/base.html' %}
+{% extends 'home/utility.html' %}
 
-{% load static %}
-{% block content %}
-<div class="card-group">
-  {% for dress in dresses %}
-  <div class="card">
-    <img class="card-img-top" src='{{dress.default_image}}'>
-    <div class="card-body">
-      <h5 class="card-title">{{ dress.name }}</h5>
-      <p class="card-text">{{dress.description}}</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+{% block ind %}
+  <div class="card-group">
+    {% for dress in dresses %}
+    <div class="card">
+      <img class="card-img-top" src='{{dress.default_image.url}}'>
+      <div class="card-body">
+        <h5 class="card-title">{{ dress.name }}</h5>
+        <p class="card-text">{{dress.description}}</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
-{% endblock content %}
+
+{% endblock ind %}
