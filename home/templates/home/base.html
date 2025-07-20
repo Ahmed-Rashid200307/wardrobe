@@ -75,10 +75,15 @@
 
     <!-- Right: Search + Auth links -->
     <div class="d-flex align-items-center">
-      <form class="d-flex me-2">
-        <input class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-sm btn-outline-success" type="submit">Search</button>
-      </form>
+    <form class="d-flex me-2 position-relative">
+      <div class="w-100 position-relative">
+        <input id="search-input" class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
+        <ul class="search-result list-group position-absolute w-100" style="top:100%; z-index:1000;"></ul>
+      </div>
+      <button class="btn btn-sm" type="submit">
+        <img src='../static/search_24dp_1F1F1F.svg' alt="Search">
+      </button>
+    </form>
       <a class="btn btn-sm btn-outline-primary me-1" href="#">Register</a>
       <a class="btn btn-sm btn-outline-secondary" href="#">Login</a>
     </div>

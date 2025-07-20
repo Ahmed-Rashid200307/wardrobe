@@ -28,7 +28,7 @@ def search(request):
   html = """ 
   """
   for dress in filtered:
-    html += f"<li>{dress.name}</li>"
+    html += f"<li class='list-group-item bg-white'>{dress.name}</li>"
   return HttpResponse(html)
 
 # serves images to be displayed for dress or variants

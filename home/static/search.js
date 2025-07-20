@@ -1,3 +1,4 @@
+
 var url = 'http://127.0.0.1:8000/home/search?'
 
 inp = document.querySelector('.form-control')
@@ -10,13 +11,23 @@ inp.addEventListener('input', function() {
     get_from_db(url,val)
   }
   else{
-    result.innerHTML = ""
+    result.innerHTML = ''
   }
 });
 
+function remove_list(e) {
+  if((e.target == inp) || (e.target == result)){
+    result.style.display = 'block';
+  }else {
+    result.style.display = 'none';
+  }
+}
+
+document.addEventListener('click', remove_list)
 
 
 async function get_from_db(url, param){
+
   const params = new URLSearchParams()
   params.append("q", param)
   
@@ -26,5 +37,4 @@ async function get_from_db(url, param){
   
   const text = await res.text();
   result.innerHTML = text
-  console.log(text);
 }
