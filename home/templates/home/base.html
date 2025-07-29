@@ -47,18 +47,19 @@
   {% bootstrap_javascript %}
 
     <style>
-    .navbar {
-      justify-content: space-between;
-      align-items: center;
-    }
-    .navbar-center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-      .card {
-    border-radius: 0.75rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  .navbar {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+    .card {
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .card:hover {
     transform: translateY(-3px);
@@ -69,33 +70,56 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .dress-all {
+    object-position: top;
+  }
+
+  .all-img-height {
+    height: 80%; /* Adjust as needed */
+  }
+
+  @media screen and (min-width: 768px) {
+    .social-icon {
+      width: 2vw; /* Adjust size for larger screens */
+      height: 2vw;
+    }
+    
+  }
     
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-light border-bottom position-relative">
+<nav class="navbar fixed-top bg-light border-bottom ">
+  
   <div class="container-fluid">
+
     
     <!-- Left: Sidebar toggle button -->
-    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
-      <img src="{% static 'lists_24dp_1F1F1F_FILL0_wght100_GRAD-25_opsz24.svg' %}" alt="">
-    </button>
-
-    <!-- Center: Logo -->
-    <a class="navbar-brand navbar-center" href="{% url 'home:index' %}">
-      <img style="width: 40px;" src="{% static 'icons8-dress-90.png' %}" alt="Logo">
-    </a>
-
-    <!-- Right: Search + Auth links -->
-    <div class="d-flex align-items-center">
-      {% if user.is_authenticated %}
-        <a href="">{{user.username}}</a>
-      {% else %}
-        <a class="btn btn-sm btn-outline-primary me-1" href="{% url 'user:register' %}">Register</a>
-        <a class="btn btn-sm btn-outline-secondary" href="{% url 'user:login' %}">Login</a>
-      {% endif %}
+      <div class="col">
+        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+          <img src="{% static 'lists_24dp_1F1F1F_FILL0_wght100_GRAD-25_opsz24.svg' %}" alt="">
+        </button>
       </div>
+      
+      <!-- Center: Logo -->
+      <div class="col d-flex justify-content-center">  
+        <a class="navbar-brand center" href="{% url 'home:index' %}">
+          <h1 class="text-dark">WARDROBE</h1>
+        </a>
+      </div>
+      
+      <!-- Right: Search + Auth links -->
+      <div class="col d-flex justify-content-end">
+        {% if user.is_authenticated %}
+        <a href="">{{user.username}}</a>
+        {% else %}
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'user:login' %}">Login</a>
+        {% endif %}
+      </div>
+      
+      
   </div>
 </nav>
 
@@ -119,6 +143,36 @@
 
 {% block content %}
 {% endblock content %}
+
+<div class="container-fluid bg-dark">
+  <div class="row row-cols-3 p-0 p-md-5 text-light">
+
+    <div class="col">
+      <p class="mb-2 fw-bold">ABOUT</p>
+      <p class="mb-2 fw-bold">FAQs</p>
+      <p class="mb-2 fw-bold">RETURN / EXCHANGE</p>
+      <p class="mb-2 fw-bold">CONTACT US</p>
+      <p class="mb-2 fw-bold">PRIVACY POLICY</p>  
+    </div>
+    <div class="col text-center" >
+
+      <h6 class="mb-3">FOLLOW US</h6>
+
+        <a href="#"><img class="social-icon me-3" src="{% static 'icons8-facebook.svg' %}" alt="facebook"></a>
+        <a href="#"><img class="social-icon me-3" src="{% static 'icons8-instagram.svg' %}" alt="instagram"></a>
+        <a href="#"><img class="social-icon me-3" src="{% static 'icons8-tiktok.svg' %}" alt="tiktok"></a>
+
+    </div>
+    <div class="col d-flex flex-column align-items-center">
+      <h6 class="mb-3">CUSTOMER SERVICE</h6>
+      <div class="d-flex flex-column align-items-start w-100" style="max-width: 120px;">
+        <a class="text-light" href="">Email</a>
+        <a class="text-light" href="">Whatsapp</a>
+      </div>
+    </div>
+
+  </div>
+</div>
 
   <script src="{% static 'search.js' %}"></script>
 

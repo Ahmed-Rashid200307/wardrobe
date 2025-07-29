@@ -2,17 +2,22 @@
 {% extends 'home/utility.html' %}
 
 {% block ind %}
-  <div class="card-group">
-    {% for dress in dresses %}
-    <div class="card">
-      <img class="card-img-top" src='{{dress.default_image.url}}'>
-      <div class="card-body">
-        <h5 class="card-title">{{ dress.name }}</h5>
-        <p class="card-text">{{dress.description}}</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  <div class="container-fluid mt-5 px-2 px-md-5">
+    <div class="row row-cols-2 row-cols-md-4 gx-1">
+
+      {% for dress in dresses %}
+      <!-- <div class="card">
+      </div> -->
+      <div class="col">
+        <div class="all-img-height p-md-4 mb-3">
+          <img src="{{ dress.default_image.url }}"  loading="lazy" class="dress-all object-fit-cover" alt="Dress">
+        </div>
+        <div class="text-center">
+          <h5 class="">{{ dress.name }}</h5>
+        </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 
 {% endblock ind %}

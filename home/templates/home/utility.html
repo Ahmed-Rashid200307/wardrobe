@@ -3,51 +3,69 @@
 
 {% block content %}
 
-<div class="d-flex align-items-center justify-content-between px-3 py-2 bg-light">
+<div class="container-fluid gx-0 gx-md-4">
 
-  <!-- Left: Filter dropdown -->
-  <div class="dropdown me-3 flex-shrink-0">
-    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-      Filter
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-      <li><a class="dropdown-item" href="#">Option 1</a></li>
-      <li><a class="dropdown-item" href="#">Option 2</a></li>
-      <li><a class="dropdown-item" href="#">Option 3</a></li>
-    </ul>
-  </div>
-
-  <!-- Center: Thin text carousel -->
-  <div class="flex-grow-1 text-center mx-3">
-    <div id="textCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <small>Welcome to our store! Check out the latest collection.</small>
-        </div>
-        <div class="carousel-item">
-          <small>Free shipping on orders over $50!</small>
-        </div>
-        <div class="carousel-item">
-          <small>Register now and get 10% off your first order.</small>
+    <div class="row align-items-center py-3">
+      
+    <!-- Left: Filter dropdown -->
+    <div class="dropdown col align-items-center order-2 order-md-1">
+      <button class="btn btn-sm dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="../static/filter_alt_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="Filter">
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+        <li><a class="dropdown-item" href="#">Option 1</a></li>
+        <li><a class="dropdown-item" href="#">Option 2</a></li>
+        <li><a class="dropdown-item" href="#">Option 3</a></li>
+      </ul>
+    </div>
+    
+    <!-- Center: Thin text carousel -->
+    <div class="col-12 col-md text-center mx-3 order-md-2 mt-3 mb-5 mb-md-2">
+      <div id="textCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <small>Welcome to our store! Check out the latest collection.</small>
+          </div>
+          <div class="carousel-item">
+            <small>Free shipping on orders over $50!</small>
+          </div>
+          <div class="carousel-item">
+            <small>Register now and get 10% off your first order.</small>
+          </div>
         </div>
       </div>
     </div>
+    
+    <!-- Right: Search box -->
+    <div class="col d-flex justify-content-end align-items-center order-3 order-md-3">
+      <form class="d-flex ">
+        <div class="position-relative">
+          <input id="search-input" class="form-control rounded-pill form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
+          <ul id="search-result" class="search-result list-group position-absolute w-100" style="top:100%; z-index:1000;"></ul>
+        </div>
+        <button class="btn btn-sm" type="submit">
+          <img src='../static/search_24dp_1F1F1F.svg' alt="Search">
+        </button>
+      </form>
+    </div>
   </div>
 
-  <!-- Right: Search box -->
-  <div class="flex-shrink-0 ms-3">
-    <form class="d-flex position-relative">
-      <div class="position-relative">
-        <input id="search-input" class="form-control form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
-        <ul id="search-result" class="search-result list-group position-absolute w-100" style="top:100%; z-index:1000;"></ul>
-      </div>
-      <button class="btn btn-sm" type="submit">
-        <img src='../static/search_24dp_1F1F1F.svg' alt="Search">
-      </button>
-    </form>
+</div>
+
+<!-- Sidebar (OffcanvasRight) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasSidebarLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="list-unstyled">
+      {% for item in category %}
+        <li ><a href="{% url 'home:category' item.id %}">{{ item.name }}</a></li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
-    
 {% block ind %}
 {% endblock ind %}
 
