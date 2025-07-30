@@ -2,18 +2,19 @@
 {% extends 'home/utility.html' %}
 
 {% block ind %}
-  <div class="container-fluid mt-5 px-2 px-md-5">
+  <div class="container-fluid px-2 px-md-5">
     <div class="row row-cols-2 row-cols-md-4 gx-1">
 
       {% for dress in dresses %}
       <!-- <div class="card">
       </div> -->
-      <div class="col">
-        <div class="all-img-height p-md-4 mb-3">
-          <img src="{{ dress.default_image.url }}"  loading="lazy" class="dress-all object-fit-cover" alt="Dress">
+      <div class="col p-2 p-md-4 mb-3">
+        <div class="all-img-height mb-3">
+          <img src="{{ dress.default_image.url }}"  loading="lazy" class="dress-all rounded-1 object-fit-cover" alt="Dress">
         </div>
-        <div class="text-center">
+        <div class="px-2">
           <h5 class="">{{ dress.name }}</h5>
+          <p class="">RS.{{dress.price}}</p>
         </div>
       </div>
       {% endfor %}

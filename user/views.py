@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import View
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth import authenticate
 # Create your views here.
 
 def register(request):
@@ -20,3 +22,19 @@ def register(request):
 def account(request):
   
   return render(request, 'registration/account.html')
+
+class LoginView(View):
+  def get(self, request):
+    if request.user.isauthenticated:
+      return redirect('user:account')
+    else:
+      form = AuthenticationForm()
+
+      context = {'form': form}
+      return render(request,'templates/login.html',context)
+
+
+  def post(self, request):
+    form = AuthenticationForm(request.POST)
+
+    print(request)

@@ -1,16 +1,20 @@
 {% extends 'home/base.html' %}
 
+{% load static %}
+
 
 {% block content %}
 
-<div class="container-fluid gx-0 gx-md-4">
+<!-- problem in the sub navbar -->
+<div class="container-fluid border-bottom">
 
-    <div class="row align-items-center py-3">
+    <div class="row  gx-0 gx-md-4 align-items-center py-3">
       
     <!-- Left: Filter dropdown -->
     <div class="dropdown col align-items-center order-2 order-md-1">
       <button class="btn btn-sm dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="../static/filter_alt_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="Filter">
+        <img src="{% static 'filter_alt_24dp_434343_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="Filter">
+        Filter
       </button>
       <ul class="dropdown-menu" aria-labelledby="filterDropdown">
         <li><a class="dropdown-item" href="#">Option 1</a></li>
@@ -20,7 +24,7 @@
     </div>
     
     <!-- Center: Thin text carousel -->
-    <div class="col-12 col-md text-center mx-3 order-md-2 mt-3 mb-5 mb-md-2">
+    <div class="col-12 col-md text-center order-md-2 mt-3 mb-5 mb-md-2">
       <div id="textCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -44,7 +48,7 @@
           <ul id="search-result" class="search-result list-group position-absolute w-100" style="top:100%; z-index:1000;"></ul>
         </div>
         <button class="btn btn-sm" type="submit">
-          <img src='../static/search_24dp_1F1F1F.svg' alt="Search">
+          <img src="{% static 'search_24dp_1F1F1F.svg' %}" alt="Search">
         </button>
       </form>
     </div>
@@ -66,6 +70,7 @@
     </ul>
   </div>
 </div>
+
 {% block ind %}
 {% endblock ind %}
 

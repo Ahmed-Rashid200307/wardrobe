@@ -17,7 +17,7 @@ def category(request, cat_id):
   cat = Category.objects.get(id=cat_id)
   dresses = Dress.objects.filter(category=cat)
 
-  context = {'dresses': dresses}
+  context = {'dresses': dresses, 'cat'  : cat}
   return render(request, 'home/cat.html', context)
 
 def search(request):

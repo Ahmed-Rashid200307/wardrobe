@@ -1,7 +1,3 @@
-{% extends "home/base.html" %}
-
-{% block content %}
-
   {% if form.errors %}
     <p>Username and password didnt match. Please try again.</p>
   {% endif %}
@@ -13,5 +9,3 @@
     <button name="submit">Log in</button>
     <input type="hidden" name="next" value="{% url 'home:index' %}">
   </form>
-
-{% endblock content %}

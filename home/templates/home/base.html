@@ -1,40 +1,5 @@
   {% load static %}
 
-  <!-- to implement  -->
-  <!-- 
-  dropdown
-    categories (url to 'home:category')
-  login\register
-          {% if user.is_authenticated %}
-        
-        <li class="nav-item">
-          <a class="nav-link" href="">{{user.username}}</a>
-          <form method="post" action="{% url 'user:logout' %}">
-            {% csrf_token %}
-            <button type="submit" >
-              Logout
-            </button>
-          </form>
-      {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'user:login' %}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'user:register' %}">Register</a>
-        </li>
-      {% endif %}
-    
-    search
-          <form class="form-inline my-2 my-lg-0" action="{% url 'home:index' %}" method="POST">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-        <ul class="search-result">
-
-        </ul>
-      </form> 
-    
-
-      -->
   
 <!DOCTYPE html>
 <html lang="en">
@@ -47,24 +12,15 @@
   {% bootstrap_javascript %}
 
     <style>
+  body {
+    margin-top: 90px;
+  }
 
   .navbar {
     justify-content: space-between;
     align-items: center;
   }
-  .navbar-center {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-    .card {
-  border-radius: 0.75rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
-  }
+
   .object-fit-cover {
     width: 100%;
     height: 100%;
@@ -76,16 +32,30 @@
   }
 
   .all-img-height {
-    height: 80%; /* Adjust as needed */
+    height: 80%;
   }
 
-  @media screen and (min-width: 768px) {
-    .social-icon {
-      width: 2vw; /* Adjust size for larger screens */
-      height: 2vw;
+  .social-icon {
+    width: 4vw;
+    height: 4vw;
+  }
+  @media screen and (max-width: 768px) {
+
+    .footer-text {
+      font-size: 0.8rem;
     }
     
   }
+
+  @media screen and (min-width: 768px) {
+
+    .social-icon {
+    width: 2vw;
+    height: 2vw;
+    }
+    
+  }
+
     
   </style>
 </head>
@@ -95,31 +65,37 @@
   
   <div class="container-fluid">
 
-    
-    <!-- Left: Sidebar toggle button -->
-      <div class="col">
+    <div class="row w-100">
+      
+      
+      <!-- Left: Sidebar toggle button -->
+      <div class="col d-flex align-items-center">
         <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
           <img src="{% static 'lists_24dp_1F1F1F_FILL0_wght100_GRAD-25_opsz24.svg' %}" alt="">
         </button>
       </div>
       
       <!-- Center: Logo -->
-      <div class="col d-flex justify-content-center">  
-        <a class="navbar-brand center" href="{% url 'home:index' %}">
+      <div class="col d-flex justify-content-center align-items-center">  
+        <a class="text-decoration-none"  href="{% url 'home:index' %}">
           <h1 class="text-dark">WARDROBE</h1>
         </a>
       </div>
       
-      <!-- Right: Search + Auth links -->
-      <div class="col d-flex justify-content-end">
+      <!-- Auth links -->
+      <div class="col d-flex text-center justify-content-end align-items-center">
         {% if user.is_authenticated %}
-        <a href="">{{user.username}}</a>
+        <a href="" class="text-decoration-none text-dark">Welcome {{user.username}}</a>
         {% else %}
-        <a class="btn btn-sm btn-outline-secondary" href="{% url 'user:login' %}">Login</a>
+        <a class="btn btn-sm btn-outline-secondary text-dark text-decoration-none" href="{% url 'user:login' %}">Login</a>
         {% endif %}
+        <button class="border-0">
+          <img src="{% static 'shopping_bag.svg' %}" alt="">
+        </button>
       </div>
       
       
+    </div>
   </div>
 </nav>
 
@@ -144,10 +120,12 @@
 {% block content %}
 {% endblock content %}
 
-<div class="container-fluid bg-dark">
-  <div class="row row-cols-3 p-0 p-md-5 text-light">
+<!-- Footer -->
 
-    <div class="col">
+  <div class="container-fluid bg-dark">
+    <div class="row row-cols-3 p-4 p-md-5 text-light">
+      
+    <div class="col footer-text">
       <p class="mb-2 fw-bold">ABOUT</p>
       <p class="mb-2 fw-bold">FAQs</p>
       <p class="mb-2 fw-bold">RETURN / EXCHANGE</p>
@@ -155,26 +133,26 @@
       <p class="mb-2 fw-bold">PRIVACY POLICY</p>  
     </div>
     <div class="col text-center" >
-
-      <h6 class="mb-3">FOLLOW US</h6>
-
-        <a href="#"><img class="social-icon me-3" src="{% static 'icons8-facebook.svg' %}" alt="facebook"></a>
-        <a href="#"><img class="social-icon me-3" src="{% static 'icons8-instagram.svg' %}" alt="instagram"></a>
-        <a href="#"><img class="social-icon me-3" src="{% static 'icons8-tiktok.svg' %}" alt="tiktok"></a>
-
+      
+      <h6 class="mb-3 footer-text">FOLLOW US </h6>
+      
+      <a href="#"><img class="social-icon me-2" src="{% static 'icons8-facebook.svg' %}" alt="facebook"></a>
+      <a href="#"><img class="social-icon me-2" src="{% static 'icons8-instagram.svg' %}" alt="instagram"></a>
+      <a href="#"><img class="social-icon me-2" src="{% static 'icons8-tiktok.svg' %}" alt="tiktok"></a>
+      
     </div>
     <div class="col d-flex flex-column align-items-center">
-      <h6 class="mb-3">CUSTOMER SERVICE</h6>
+      <p class="mb-3 footer-text"><b>CUSTOMER SERVICE</b></p>
       <div class="d-flex flex-column align-items-start w-100" style="max-width: 120px;">
-        <a class="text-light" href="">Email</a>
-        <a class="text-light" href="">Whatsapp</a>
+        <a class="text-light fs-6 fs-md" href="">Email</a>
+        <a class="text-light fs-6 fs-md" href="">Whatsapp</a>
       </div>
     </div>
-
+    
   </div>
 </div>
 
-  <script src="{% static 'search.js' %}"></script>
+<script src="{% static 'search.js' %}"></script>
 
 </body>
 </html>
