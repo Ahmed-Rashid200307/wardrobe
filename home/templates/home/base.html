@@ -70,7 +70,7 @@
       
       <!-- Left: Sidebar toggle button -->
       <div class="col d-flex align-items-center">
-        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
           <img src="{% static 'lists_24dp_1F1F1F_FILL0_wght100_GRAD-25_opsz24.svg' %}" alt="">
         </button>
       </div>
@@ -84,11 +84,17 @@
       
       <!-- Auth links -->
       <div class="col d-flex text-center justify-content-end align-items-center">
+        
         {% if user.is_authenticated %}
-        <a href="" class="text-decoration-none text-dark">Welcome {{user.username}}</a>
+          <a class="btn text-decoration-none text-dark" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight">
+            Welcome {{user.username}}
+          </a>
         {% else %}
-        <a class="btn btn-sm btn-outline-secondary text-dark text-decoration-none" href="{% url 'user:login' %}">Login</a>
+          <a id="login-btn" class="btn text-decoration-none text-dark" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight" data-url="{% url 'user:login' %}">
+            Login
+          </a>
         {% endif %}
+
         <button class="border-0">
           <img src="{% static 'shopping_bag.svg' %}" alt="">
         </button>
@@ -99,8 +105,8 @@
   </div>
 </nav>
 
-<!-- Sidebar (Offcanvas) -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+<!-- Sidebar (Offcanvas) Left-->
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasSidebarLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -114,6 +120,16 @@
   </div>
 </div>
 
+<!-- Sidebar (OffcanvasRight) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="form-container">
+
+  </div>
+</div>
 
 
 
@@ -153,6 +169,7 @@
 </div>
 
 <script src="{% static 'search.js' %}"></script>
+<script src="{% static 'login.js' %}"></script>
 
 </body>
 </html>

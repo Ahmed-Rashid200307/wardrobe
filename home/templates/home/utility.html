@@ -44,7 +44,7 @@
     <div class="col d-flex justify-content-end align-items-center order-3 order-md-3">
       <form class="d-flex ">
         <div class="position-relative">
-          <input id="search-input" class="form-control rounded-pill form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
+          <input id="search-input" class="form-control rounded-pill form-control-sm me-2" data-url="{% url 'home:search' %}" type="search" placeholder="Search" aria-label="Search">
           <ul id="search-result" class="search-result list-group position-absolute w-100" style="top:100%; z-index:1000;"></ul>
         </div>
         <button class="btn btn-sm" type="submit">
@@ -54,21 +54,6 @@
     </div>
   </div>
 
-</div>
-
-<!-- Sidebar (OffcanvasRight) -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasSidebarLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <ul class="list-unstyled">
-      {% for item in category %}
-        <li ><a href="{% url 'home:category' item.id %}">{{ item.name }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
 </div>
 
 {% block ind %}

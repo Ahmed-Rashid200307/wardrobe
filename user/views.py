@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from django.views.generic import View
+from django.views.generic import View,FormView
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import authenticate
 # Create your views here.
@@ -23,18 +23,22 @@ def account(request):
   
   return render(request, 'registration/account.html')
 
-class LoginView(View):
-  def get(self, request):
-    if request.user.isauthenticated:
-      return redirect('user:account')
-    else:
-      form = AuthenticationForm()
+class LoginView(FormView):
+  template_name = 'login.html'
+  # def get(self, request):
+  #   print(request.headers['Cookie'])
+  #   print(request.COOKIES)
+  #   num_visits = request.session.get('num_visits', 0)
+  #   request.session['num_visits'] = num_visits + 1
+  #   print(num_visits)
+  #   form = AuthenticationForm()
 
-      context = {'form': form}
-      return render(request,'templates/login.html',context)
+  #   context = {'form': form}
+
+  #   return render(request,'templates/user/login.html',context)
 
 
-  def post(self, request):
-    form = AuthenticationForm(request.POST)
+  # def post(self, request):
+  #   # form = AuthenticationForm(request.POST)
 
-    print(request)
+  #   print(request)
