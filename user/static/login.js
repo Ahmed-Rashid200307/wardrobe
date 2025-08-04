@@ -15,3 +15,6 @@ async function get_form(){
 document.getElementById('offcanvasRight').addEventListener('shown.bs.offcanvas',()=>{
     get_form()
 })
+
+
+// CREATE POST REQUEST FOR FORM HERE

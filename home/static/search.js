@@ -1,8 +1,8 @@
 
-var url = 'http://127.0.0.1:8000/home/search?'
 
-inp = document.querySelector('.form-control')
-result = document.querySelector('.search-result')
+const inp = document.querySelector('.form-control')
+const result = document.querySelector('.search-result')
+const url = inp.dataset.url + '?'
 
 inp.addEventListener('input', function() {
   val = inp.value
