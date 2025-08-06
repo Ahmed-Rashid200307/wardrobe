@@ -1,16 +1,29 @@
+
 <div class="d-flex justify-content-center">
 
-  <form action="{% url 'user:login' %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    
-    <div class="d-flex justify-content-center">
-      <button class="btn btn-dark w-100 rounded-2" name="submit" style="border: none;">Sign In</button>
-      <input type="hidden" name="next" value="{% url 'home:index' %}">
-    </div>
+  <form id="form">
     
     {% if form.errors %}
-    <p>Username and password didnt match. Please try again.</p>
+    <p>Username and password didnt match</p>
     {% endif %}
+    
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="mb-2">
+        {{ field.label_tag }}
+        {{ field }}
+        {% for error in field.errors %}
+          <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+
+    
+    <div class="mt-4">
+      <button class="btn w-100 btn-dark  rounded-2" id="submit-btn" style="border: none;">
+        Sign In
+      </button>
+    </div>
   </form>
 </div>

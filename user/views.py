@@ -26,3 +26,4 @@ def account(request):
 
 class LoginView(LoginView):
   form_class = Loginform
+  next_page = '/' 

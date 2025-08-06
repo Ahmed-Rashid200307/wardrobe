@@ -5,3 +5,9 @@ class Loginform(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control',"autofocus": True}))
     password = forms.CharField(label=("Password"),strip=False,widget=forms.PasswordInput(attrs={'class':'form-control'}))
 
+    error_messages = {
+        "invalid_login": (
+            "Please enter a correct %(username)s and password"
+        ),
+        "inactive": ("This account is inactive."),
+    }

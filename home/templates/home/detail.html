@@ -1,0 +1,29 @@
+{% extends 'home/base.html' %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+    
+    <div class="col">
+
+        <div id="textCarousel" class="carousel slide" data-bs-ride="carousel"></div>
+            <div class="carousel-inner">
+                <div class="carousel-item active all-img-height">
+                    <img src="{{ product.default_image.url }}" class="dress-all rounded-1 object-fit-cover" alt="Image">
+                </div>
+        
+                {% for var in variant %}
+                <div class="carousel-item all-img-height">
+                    <img src="{{ var.image.url }}" class="dress-all rounded-1 object-fit-cover" alt="Image">
+                </div>
+                {% endfor %}
+                
+                </div>
+            </div>
+
+        </div>
+    <div class="col"></div>
+
+</div>
+{% endblock content %}

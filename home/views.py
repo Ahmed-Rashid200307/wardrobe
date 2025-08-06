@@ -20,6 +20,26 @@ def category(request, cat_id):
   context = {'dresses': dresses, 'cat'  : cat}
   return render(request, 'home/cat.html', context)
 
+
+# Single Product View
+class ProductView(View):
+  
+  # maybe get query from a parameter later
+  def get(self,request):
+
+    product = Dress.objects.get(code = request.GET.get('code'))
+    category = product.category
+    variants = Variant.objects.filter(dress_id = product.pk)
+
+    context = {
+      'product': product,
+      'code': category.code,
+      'variant': variants
+    }
+
+    return render(request,'home/detail.html',context)
+
+# Product search service
 def search(request):
   search = request.GET.get("q")
   filtered = Dress.objects.filter(name__icontains=search)
