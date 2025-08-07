@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# remove bootstrap app later
+
 INSTALLED_APPS = [
 #   myapps
     'home',
@@ -41,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -120,14 +121,14 @@ USE_I18N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 STATIC_URL = 'static/'
-MEDIA_ROOT = 'C:/Users/as comp/Desktop/wardrobe/images'
+
+MEDIA_ROOT = BASE_DIR.joinpath('images').__str__()
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

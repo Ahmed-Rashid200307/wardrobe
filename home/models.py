@@ -48,15 +48,16 @@ class Dress(models.Model):
   inStock = models.BooleanField()
   code = models.IntegerField(unique=True)
   description = models.TextField()
-  default_image = models.ImageField(unique=True,upload_to="images/default",blank=True)
+  default_image = models.ImageField(unique=True,upload_to="default",blank=False,null=False)
 
-  def collision(self):
-     if Variant.objects.filter(image = self.default_image).exists():
-        raise ValidationError({"image":"Image already selected for variant image.\nPlease select a different image."})
+  def clean(self):
+
+     if Dress.objects.filter(default_image = ("default/"+self.default_image.name)):
+        raise ValidationError(f"Image already selected for another dress",code="invalid")
+
      
 
   def save(self, *args, **kwargs):
-            self.collision()
             self.inStock = (self.stock != 0)
             super().save(*args, **kwargs)
 
@@ -67,15 +68,11 @@ class Dress(models.Model):
 
 class Variant(models.Model):
   dress = models.ForeignKey(Dress, models.CASCADE)
-  image = models.ImageField(upload_to="images/variants",blank=True)
+  image = models.ImageField(upload_to="variants",blank=True)
 
-  def collision(self):
-    if Dress.objects.filter(default_image = self.image).exists():
-      raise ValidationError({"image":"Image already selected for default image.\nPlease select a different image."})
+  def clean(self):
+    if self.dress.default_image.name.__contains__(self.image.name):
+      raise ValidationError("Image already selected for default image.\nPlease select a different image or change the default image.", code="invalid")
 
   def __str__(self):
     return self.dress.name+"_" + str(self.id)
-  
-  def save(self, *args, **kwargs):
-          self.collision()
-          super().save(*args, **kwargs)

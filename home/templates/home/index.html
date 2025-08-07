@@ -8,10 +8,10 @@
       {% for dress in dresses %}
 
       <a href="home/product?code={{ dress.code }}">
-
+<!-- Access the images using media url later -->
         <div class="col p-2 p-md-4 mb-3">
           <div class="all-img-height mb-3">
-          <img src="{{ dress.default_image.url }}"  loading="lazy" class="dress-all rounded-1 object-fit-cover" alt="Dress">
+          <img src="/images{{ dress.default_image.url }}"  loading="lazy" class="dress-all rounded-1 object-fit-cover" alt="Dress">
         </div>
         <div class="px-2">
           <h5 class="">{{ dress.name }}</h5>
