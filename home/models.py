@@ -69,7 +69,7 @@ class Dress(models.Model):
 class Variant(models.Model):
   dress = models.ForeignKey(Dress, models.CASCADE)
   image = models.ImageField(upload_to="variants",blank=True)
-
+# add varient code
   def clean(self):
     if self.dress.default_image.name.__contains__(self.image.name):
       raise ValidationError("Image already selected for default image.\nPlease select a different image or change the default image.", code="invalid")

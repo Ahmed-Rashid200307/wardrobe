@@ -2,3 +2,4 @@ site
 site/lib
 *__pycache__
 C:/
+static/images/

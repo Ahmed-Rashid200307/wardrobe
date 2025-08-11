@@ -30,10 +30,6 @@ class ProductView(View):
     product = Dress.objects.get(code = request.GET.get('code'))
     category = product.category
     variants = Variant.objects.filter(dress_id = product.pk)
-    
-
-    for var in variants:
-      print(type(var))
 
     context = {
       'product': product,

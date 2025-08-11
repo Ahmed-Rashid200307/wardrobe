@@ -6,11 +6,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>WARDROBE</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
 
   <link rel="stylesheet" href="{% static 'styles/css/bootstrap.min.css' %}">
-  <script src="{% static 'styles/js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'styles/js/bootstrap.bundle.min.js' %}"></script>
 
 
     <style>
@@ -46,6 +50,10 @@
     .footer-text {
       font-size: 0.8rem;
     }
+
+    #product-col{
+      padding: 5%;
+    }
     
   }
 
@@ -54,6 +62,11 @@
     .social-icon {
     width: 2vw;
     height: 2vw;
+    }
+
+    #product-col{
+      padding-left: 22vh;
+      padding-right: 22vh;
     }
     
   }
@@ -65,6 +78,10 @@
   .form-control:focus {
     border-color: black;
     box-shadow: none;
+  }
+
+  #lato-text {
+    font-family: Lato;
   }
     
   </style>
@@ -135,8 +152,6 @@
     <button type="button" class="m-0" style="background-color: black; border: none;" data-bs-dismiss="offcanvas" aria-label="Close">
       <img src="{% static 'close-right.svg' %}" alt="">
     </button>
-    <!-- <div class="d-flex justify-content-start">
-    </div> -->
     <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
   </div>
   <div class="offcanvas-body" id="form-container">
@@ -151,7 +166,7 @@
 
 <!-- Footer -->
 
-  <div class="container-fluid"
+  <div class="container-fluid" id="lato-text"
   style="background-color: black;">
     <div class="row row-cols-3 p-4 p-md-5 text-light">
       
@@ -162,6 +177,7 @@
       <p class="mb-2 fw-bold">CONTACT US</p>
       <p class="mb-2 fw-bold">PRIVACY POLICY</p>  
     </div>
+
     <div class="col text-center" >
       
       <h6 class="mb-3 footer-text">FOLLOW US </h6>
@@ -169,8 +185,15 @@
       <a href="#"><img class="social-icon me-2" src="{% static 'icons8-facebook.svg' %}" alt="facebook"></a>
       <a href="#"><img class="social-icon me-2" src="{% static 'icons8-instagram.svg' %}" alt="instagram"></a>
       <a href="#"><img class="social-icon me-2" src="{% static 'icons8-tiktok.svg' %}" alt="tiktok"></a>
+
+      <div>
+
+        <label for="">Query</label>
+        <input type="text" name="" id="">
+      </div>
       
     </div>
+
     <div class="col d-flex flex-column align-items-center">
       <p class="mb-3 footer-text"><b>CUSTOMER SERVICE</b></p>
       <div class="d-flex flex-column align-items-start w-100" style="max-width: 120px;">
