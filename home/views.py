@@ -8,6 +8,9 @@ from django.http import FileResponse
 def index(request):
   dresses = Dress.objects.all()
   
+  for dress in dresses:
+    print(dress.default_image.url)
+
 
   context = {'dresses': dresses}
   return render(request, 'home/index.html', context)
@@ -30,11 +33,14 @@ class ProductView(View):
     product = Dress.objects.get(code = request.GET.get('code'))
     category = product.category
     variants = Variant.objects.filter(dress_id = product.pk)
+    sizes = product.size.filter(dress = product.pk)
+
 
     context = {
       'product': product,
       'code': category.code,
-      'variant': variants
+      'variant': variants,
+      'sizes' : sizes
     }
 
     return render(request,'home/detail.html',context)

@@ -15,6 +15,14 @@ class Category(models.Model):
   def __str__(self):
     return self.name
 
+### size selection for each dress
+
+class Size(models.Model):
+    name = models.CharField(max_length=5)
+
+    def __str__(self):
+        return self.name
+    
 ###Each category dress
 
 class Dress(models.Model):
@@ -24,24 +32,7 @@ class Dress(models.Model):
 
   category = models.ForeignKey(Category, models.CASCADE)
   name = models.CharField(max_length=40)
-
-  Extra_Small = "XS"
-  Small = "S"
-  Medium = "M"
-  Large = "L"
-  Extra_Large = "XL"
-  Extra_Extra_Large = "XXL"
-  
-  choices = {
-    (Extra_Small,"Extra Small"),
-    (Small,"Small"),
-    (Medium,"Medium"),
-    (Large,"Large"),
-    (Extra_Large,"Extra Large"),
-    (Extra_Extra_Large,"Extra Extra Large"),
-  }
-
-  size = models.CharField(choices=choices, default=Medium, max_length=4)
+  size = models.ManyToManyField(Size)
   price = models.IntegerField()
   composition = models.CharField(max_length=30)
   stock = models.IntegerField(null=True)
@@ -54,8 +45,6 @@ class Dress(models.Model):
 
      if Dress.objects.filter(default_image = ("default/"+self.default_image.name)):
         raise ValidationError(f"Image already selected for another dress",code="invalid")
-
-     
 
   def save(self, *args, **kwargs):
             self.inStock = (self.stock != 0)
@@ -70,9 +59,11 @@ class Variant(models.Model):
   dress = models.ForeignKey(Dress, models.CASCADE)
   image = models.ImageField(upload_to="variants",blank=True)
 # add varient code
+# add name of color
   def clean(self):
     if self.dress.default_image.name.__contains__(self.image.name):
       raise ValidationError("Image already selected for default image.\nPlease select a different image or change the default image.", code="invalid")
 
   def __str__(self):
     return self.dress.name+"_" + str(self.id)
+  

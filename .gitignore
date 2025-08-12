@@ -3,3 +3,4 @@ site/lib
 *__pycache__
 C:/
 static/images/
+db.sqlite3
