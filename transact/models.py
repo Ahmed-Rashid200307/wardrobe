@@ -1,8 +1,7 @@
 from django.db import models
 from home.models import Dress
 from datetime import datetime
-from django.contrib.auth.models import UserManager
-UserManager
+
 # Create your models here.
     
 
@@ -29,7 +28,7 @@ class Order(models.Model):
     total_quantity = models.IntegerField(default=0)
     total_amount = models.IntegerField(default=0)
 
-# TO GET TOTAL QUANTITIY OF TH ORDER
+# TO GET TOTAL QUANTITIY OF THE ORDER
     def get_total_quantity(self):
       total = 0
       for orderitem in self.items:

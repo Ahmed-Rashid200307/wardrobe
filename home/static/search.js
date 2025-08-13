@@ -38,3 +38,4 @@ async function get_from_db(url, param){
   const text = await res.text();
   result.innerHTML = text
 }
+console.log(document.cookie)
