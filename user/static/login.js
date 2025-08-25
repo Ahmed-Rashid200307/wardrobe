@@ -2,7 +2,7 @@
 const link = document.getElementById('login-btn');
 const canvas_right = document.getElementById('offcanvasRight');
 const form_container = document.getElementById('form-container');
-let form;
+let form = undefined;
 const form_url = link.dataset.url;
 
 async function get_form(){

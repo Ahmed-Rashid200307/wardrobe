@@ -36,34 +36,44 @@
         
     </div>
 
-    <!-- add varient code -->
-     <!-- send data with js or use a form with hidden input values -->
+        <!-- add varient code -->
+        <!-- send data with js or use a form with hidden input values -->
+        
     <div class="col ps-4 pe-1 p-md-4" id="latoText">
+              <form id="cartForm" action="/cart" method="post">
 
+            {% csrf_token %}
+              
             <a href="" id="productCode">{{code}}/{{product.code}}</a>
-                
+            <input type="text" name="code" id="productCode" value="{{code}}/{{product.code}}" hidden>
+              
             <div class="my-4">
                 <h1 class="tenor-text" id="productName">{{product.name}}</h1>
-                <h5 id="productPrice">RS {{product.price}}</h5>   
+                <input type="text" name="name" id="inputName" value="{{product.name}}" hidden>
+                <h5 id="productPrice">RS {{product.price}}</h5>
+                <input type="text" name="price" id="inputPrice" value="{{product.price}}" hidden>
             </div>
-            
+                
             <div class="mb-4">
                 <h5 id="productVariant">Colors</h5>
                 <div class="row w-50">
                     
                     {% for var in variant %}
                     <div class="col">
-                        <img class="object-fit-cover" src="{% static 'images' %}{{var.image.url}}" alt="Second slide">
+                        <label>
+                            <img class="object-fit-cover" src="{% static 'images' %}{{var.image.url}}" alt="Second slide">
+                            <input type="radio" name="productColor" value="{{var.image.url}}" id="inputColor" hidden>
+                        </label>
                     </div>
                     {% endfor %}
                 </div>
             </div>
-            
+                
             <div class="mb-4">
                 <label for="size-options"><h5>Size</h5></label>
                 <div class="mt-2">
                     {% for size in sizes %}
-                    <input type="radio" class="btn-check border-end" value="{{size}}" name="size-options" id="option{{size}}" autocomplete="off" checked>
+                    <input type="radio" class="btn-check border-end" value="{{size}}" name="size" id="option{{size}}" autocomplete="off" checked>
                     <label class="btn rounded-0" for="option{{size}}">{{size}}</label>
                     {% endfor %}
                 </div>
@@ -72,19 +82,22 @@
             
             <div class="mb-4">
                 <label class="mb-2" for="quantity"><h5>Quantity</h5></label>
-                <input class="d-block" type="number" max="5" min="1"value="1" name="quantity" id="">
+                <input class="d-block" type="number" max="5" min="1"value="1" name="quantity" id="inputQuantity">
             </div>
             
-            <div class="d-flex justify-content-center mb-4">
-                <button class="w-100 py-2" id="cartBtn" style="background-color: black; color: white;"><h3 class="m-0">Add To Cart</h3></button>
-            </div>
             
-            <h5>Product Details</h5>
-            <p>{{product.description}}</p>
+            
+            </div>
+        </form>
+        <div class="d-flex justify-content-center mb-4">
+            <button type="button" class="w-100 py-2" id="cartBtn" style="background-color: black; color: white;"><h3 class="m-0">Add To Cart</h3></button>
+        </div>
         
-        
-    </div>
+        <h5>Product Details</h5>
+        <p>{{product.description}}</p>
     
+    </div>
 </div>
-</div>
+
+<script src='{% static "cart.js" %}' type="module"></script>
 {% endblock content %}

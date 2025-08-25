@@ -3,13 +3,11 @@ from .models import Category,Dress,Variant
 from django.views.generic import View
 from wardrobe import settings
 from django.http import FileResponse
+from django.urls import reverse_lazy
 # Create your views here.
 
 def index(request):
   dresses = Dress.objects.all()
-  
-  for dress in dresses:
-    print(dress.default_image.url)
 
 
   context = {'dresses': dresses}

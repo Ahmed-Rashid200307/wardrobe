@@ -1,8 +1,19 @@
+import random
+import string
 from django.db import models
 from home.models import Dress
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
+def get_order_item(order):
+
+    return OrderItem.objects.filter(order = order)
+
+def get_ref_code(date):
+
+    rand = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+    return f"ORD-{date}-{rand}"
     
 
 # class cart(models.Model):
@@ -11,8 +22,9 @@ from datetime import datetime
 # MODEL FOR EACH ORDER(MAY CONTAIN MANY ITEMS)
 class Order(models.Model):
 
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
     ref_code = models.CharField(max_length=20)
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
     # shipping_address = models.OneToOneField(
     #     ShippingAddress, on_delete=models.SET_NULL, null=True)
@@ -24,14 +36,14 @@ class Order(models.Model):
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
-    order_note = models.TextField
-    total_quantity = models.IntegerField(default=0)
-    total_amount = models.IntegerField(default=0)
+    order_note = models.TextField(max_length=200, blank=True)
+    total_quantity = models.IntegerField()
+    total_amount = models.IntegerField()
 
 # TO GET TOTAL QUANTITIY OF THE ORDER
     def get_total_quantity(self):
       total = 0
-      for orderitem in self.items:
+      for orderitem in get_order_item(self):
           total += orderitem.quantity
 
       return total
@@ -39,25 +51,23 @@ class Order(models.Model):
 # TO GET TOTAL AMOUNT (SUM AMOUNT OF ALL ITEMS)
     def get_total_amount(self):
       total = 0
-      for orderitem in self.items:
-          total += orderitem.item_amont()
+      for orderitem in get_order_item(self):
+          total += orderitem.item_amount()
 
-      if self.coupon:
-          total -= self.coupon
 
       return total
 
     def save(self, *args, **kwargs):
-        if self.total_quantity == 0:
-          self.total_quantity = self.get_total_quantity()
-        if self.total_amount == 0:
-          self.total_amount = self.get_total_amount()
+
+        self.ref_code = get_ref_code(self.ordered_date)
+
+        self.total_quantity = self.get_total_quantity()
+        self.total_amount = self.get_total_amount()
         return super().save(*args,**kwargs)
     
 # MODEL FOR EACH ITEM IN A ORDER
 class OrderItem(models.Model):
     
-    ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Dress, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
@@ -68,6 +78,7 @@ class OrderItem(models.Model):
     def increment(self,by=1):
         self.quantity += by
         self.save()
+
     def decrement(self,by=1):
         self.quantity -= by
         self.save()
