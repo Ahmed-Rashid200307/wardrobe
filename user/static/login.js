@@ -1,9 +1,9 @@
 
-const link = document.getElementById('login-btn');
+const login_btn = document.getElementById('loginBtn');
 const canvas_right = document.getElementById('offcanvasRight');
 const form_container = document.getElementById('form-container');
-let form = undefined;
-const form_url = link.dataset.url;
+console.log(login_btn)
+const form_url = login_btn.dataset.url;
 
 async function get_form(){
   
@@ -11,6 +11,7 @@ async function get_form(){
   
   const text = await res.text();
   form_container.innerHTML = text;
+  canvas_right.dataset.formLoaded = 'true';
 }
 
 async function validate_form(form_data) {
@@ -21,25 +22,26 @@ async function validate_form(form_data) {
       method: "POST",
       body: form_data
     }
-  )
+  );
 
   if(req.redirected){
-    window.location.replace(req.url)
+    window.location.reload();
   }
   else{
 
-    form_container.innerHTML = res
+    form_container.innerHTML = res;
   }
+
 }
 
 function add_listner_wform() {
-    get_form().then(
-    ()=>{
 
-      form = document.getElementById('form')
+    get_form().then(()=>{
+
+      const form = document.getElementById('form')
       form.addEventListener('submit',(elem)=>{
 
-        elem.preventDefault()
+        elem.preventDefault();
         validate_form(new FormData(form));
       
       });
@@ -47,9 +49,11 @@ function add_listner_wform() {
     }
   )
 
-  canvas_right.removeEventListener('shown.bs.offcanvas',add_listner_wform)
+  canvas_right.removeEventListener('shown.bs.offcanvas',add_listner_wform);
 
 }
 
 
 canvas_right.addEventListener('shown.bs.offcanvas',add_listner_wform);
+
+export {login_btn}

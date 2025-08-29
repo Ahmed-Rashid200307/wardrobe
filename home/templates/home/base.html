@@ -21,15 +21,20 @@
   <script src="{% static 'styles/js/bootstrap.bundle.min.js' %}"></script>
 
 
-    <style>
+  <style>
 
   body{
     margin-top: 14vh;
   }
 
+  .bg-white{
+    background-color: white;
+  }
+
   .navbar {
     justify-content: space-between;
     align-items: center;
+    background-color: white;
   }
 
   .object-fit-cover {
@@ -97,7 +102,7 @@
 </head>
 <body>
 
-<nav class="navbar fixed-top bg-light border-bottom">
+<nav class="navbar fixed-top bg-light border-bottom bg-white">
       
       
       <!-- Left: Sidebar toggle button -->
@@ -122,7 +127,7 @@
             <img src="{% static 'person1.svg' %}" alt="Account">
           </a>
         {% else %}
-          <a id="login-btn" class="btn text-decoration-none text-dark" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight" data-url="{% url 'user:login' %}">
+          <a id="loginBtn" class="btn text-decoration-none text-dark" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight" data-url="{% url 'user:login' %}">
             Login
           </a>
         {% endif %}
@@ -156,7 +161,7 @@
 </div>
 
 <!-- Sidebar (OffcanvasRight) -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" data-form-loaded="false">
   <div class="offcanvas-header d-flex flex-row justify-content-between pb-3" style="background-color: black; color: white; padding-top: 3%;">
     <button type="button" class="m-0" style="background-color: black; border: none;" data-bs-dismiss="offcanvas" aria-label="Close">
       <img src="{% static 'close-right.svg' %}" alt="">
@@ -214,8 +219,8 @@
   </div>
 </div>
 
-<script src="{% static 'search.js' %}"></script>
-<script src="{% static 'login.js' %}"></script>
+<script  type="module" src="{% static 'search.js' %}"></script>
+<script type="module" src="{% static 'login.js' %}"></script>
 
 </body>
 </html>

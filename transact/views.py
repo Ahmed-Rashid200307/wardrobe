@@ -22,8 +22,9 @@ class CartAction(View):
                 
                 return JsonResponse({'success': False})
             
-        elif request.POST.get('is_login_available') == 'false':
-            return register(request)
+        else:
+            
+            return JsonResponse({'success': False})
 
 
     def add_to_cart(self, req):

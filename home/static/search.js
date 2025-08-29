@@ -1,11 +1,11 @@
 
 
-const inp = document.querySelector('.form-control')
+const inp = document.getElementById('searchInput')
 const result = document.querySelector('.search-result')
 const url = inp.dataset.url + '?'
 
 inp.addEventListener('input', function() {
-  val = inp.value
+  const val = inp.value
   if(inp.value){
 
     get_from_db(url,val)
@@ -38,4 +38,3 @@ async function get_from_db(url, param){
   const text = await res.text();
   result.innerHTML = text
 }
-console.log(document.cookie)

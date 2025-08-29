@@ -1,3 +1,4 @@
+import {login_btn} from './login.js'
 const form = document.getElementById('cartForm');
 
 
@@ -7,16 +8,26 @@ async function sendCartInfo() {
 
 
     const formData = new FormData(form);
-    formData.append('is_login_available', false)
 
-    const validation = await fetch('/cart/validate', {
+    const res = await fetch('/cart/validate', {
         method: 'POST',
         body: formData,
     })
 
-    const data = await validation.text()
+    const data = await res.json()
+
+    if(data.success){
+        console.log('added to cart')
+    }
+    else{
+        login_btn.click();
+    }
+
+
 
 
 }
 
 cartBtn.addEventListener('click',sendCartInfo)
+var cred = new CredentialsContainer()
+console.log(cred.get())
