@@ -2,13 +2,13 @@ from django.shortcuts import render, HttpResponse
 from .models import Category,Dress,Variant
 from django.views.generic import View
 from wardrobe import settings
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 # Create your views here.
 
 def index(request):
-  dresses = Dress.objects.all()
-
-
+  dresses = Dress.objects.prefetch_related("variant_set")
+  for dress in dresses:
+    print(dress)
   context = {'dresses': dresses}
   return render(request, 'home/index.html', context)
 
@@ -45,12 +45,20 @@ class ProductView(View):
 # Product search service
 def search(request):
   search = request.GET.get("q")
-  filtered = Dress.objects.filter(name__icontains=search)
-  html = """ 
-  """
-  for dress in filtered:
-    html += f"<li class='list-group-item bg-white'>{dress.name}</li>"
-  return HttpResponse(html)
+  filtered_dress = Dress.objects.filter(name__icontains=search)
+  filtered_categories = Category.objects.filter(name__icontains = search)
+
+  jsonObj = {'categories':[], 'dress':[]}
+
+  if filtered_dress:
+    for dress in filtered_dress:
+      jsonObj['dress'].append([dress.name, dress.code])
+
+  if filtered_categories:
+    for category in filtered_categories:
+      jsonObj['categories'].append([category.name, category.code])
+      
+  return JsonResponse(jsonObj)
 
 # serves images to be displayed for dress or variants
 class ImageView(View):

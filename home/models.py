@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from colorfield.fields import ColorField
 
 # Create your models here.
 
@@ -57,8 +58,9 @@ class Dress(models.Model):
 
 class Variant(models.Model):
   dress = models.ForeignKey(Dress, models.CASCADE)
-  image = models.ImageField(upload_to="variants",blank=True)
-# add varient code
+  image = models.ImageField(upload_to="variants",blank=True, unique=True)
+  code = models.IntegerField(blank=True, null=True, unique=True)
+  colorHex = ColorField(null=True)
 # add name of color
   def clean(self):
     if self.dress.default_image.name.__contains__(self.image.name):
@@ -67,3 +69,4 @@ class Variant(models.Model):
   def __str__(self):
     return self.dress.name+"_" + str(self.id)
   
+     

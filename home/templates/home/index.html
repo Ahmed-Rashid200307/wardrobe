@@ -4,23 +4,31 @@
 {% load static %}
 
 {% block ind %}
-  <div class="container-fluid px-2 px-md-5">
+  <div class="container-fluid px-2 px-md-3">
     <div class="row row-cols-2 row-cols-md-4 gx-1">
 
       {% for dress in dresses %}
 
-      <a href="home/product?code={{ dress.code }}">
-        <div class="col p-2 p-md-4 mb-3">
+      <div class="col p-2 p-md-3 mb-3 font-1">
+        <a href="home/product?code={{ dress.code }}" class="link">
           <div class="all-img-height mb-3">
-          <img src="{% static 'images' %}{{dress.default_image.url}}"  loading="lazy" class="dress-all rounded-1 object-fit-cover" alt="Dress">
-        </div>
-        <div class="px-2">
-          <h5 class="">{{ dress.name }}</h5>
-          <p class="">RS.{{dress.price}}</p>
-        </div>
+            <img src="{% static 'images' %}{{dress.default_image.url}}"  loading="lazy" class="dress-all object-fit-cover" alt="Dress">
+          </div>
+          <div class="product-meta px-2">
+            <p class="mb-1">{{ dress.name }}</p>
+            <p class="mb-1">Rs.{{dress.price}}</p>
+            <p class="mb-1">{{dress.category}}</p>
+            <div class="d-flex">
+              {% for variant in dress.variant_set.all %}
+              {% if variant.colorHex %}
+              <div class="color-circle" style="background-color: {{ variant.colorHex }};"></div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </a>
         
         </div>
-      </a>
       {% endfor %}
     </div>
   </div>

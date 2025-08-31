@@ -2,7 +2,6 @@
 const login_btn = document.getElementById('loginBtn');
 const canvas_right = document.getElementById('offcanvasRight');
 const form_container = document.getElementById('form-container');
-console.log(login_btn)
 const form_url = login_btn.dataset.url;
 
 async function get_form(){

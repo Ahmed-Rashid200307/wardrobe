@@ -1,11 +1,19 @@
-import {login_btn} from './login.js'
+
+const cartBtn = document.getElementById('cartBtn');
 const form = document.getElementById('cartForm');
+const cartPopup = document.getElementById('cartPopup');
 
+function showAddedPopup(){
 
-console.log(document.cookie)
+    cartPopup.style.right = '30px';
+    
+    setTimeout(()=>{
+        cartPopup.style.right = '-200px'
+    }, 4000)
+    
+}
 
 async function sendCartInfo() {
-
 
     const formData = new FormData(form);
 
@@ -15,11 +23,14 @@ async function sendCartInfo() {
     })
 
     const data = await res.json()
+    console.log(data)
 
     if(data.success){
-        console.log('added to cart')
+        showAddedPopup();
+        // addProductToSideBar();
     }
     else{
+        const login_btn = document.getElementById('loginBtn');
         login_btn.click();
     }
 
@@ -29,5 +40,3 @@ async function sendCartInfo() {
 }
 
 cartBtn.addEventListener('click',sendCartInfo)
-var cred = new CredentialsContainer()
-console.log(cred.get())

@@ -10,105 +10,26 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Tenor+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Tenor+Sans&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-
-
-  <link rel="stylesheet" href="{% static 'styles/css/bootstrap.min.css' %}">
-  <script src="{% static 'styles/js/bootstrap.bundle.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'bsstyles/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/basic.css' %}">
+  <script src="{% static 'bsstyles/js/bootstrap.bundle.min.js' %}"></script>
 
 
-  <style>
 
-  body{
-    margin-top: 14vh;
-  }
-
-  .bg-white{
-    background-color: white;
-  }
-
-  .navbar {
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-  }
-
-  .object-fit-cover {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .dress-all {
-    object-position: top;
-  }
-
-  .all-img-height {
-    height: 80%;
-  }
-
-  .social-icon {
-    width: 4vw;
-    height: 4vw;
-  }
-  @media screen and (max-width: 768px) {
-
-    .footer-text {
-      font-size: 0.8rem;
-    }
-
-    #product-col{
-      padding: 5%;
-    }
-    
-  }
-
-  @media screen and (min-width: 768px) {
-
-    .social-icon {
-    width: 2vw;
-    height: 2vw;
-    }
-
-    #product-col{
-      padding-left: 12vh;
-      padding-right: 14vh;
-    }
-    
-  }
-
-  .btn:active {
-    outline: none;
-  }
-
-  .form-control:focus {
-    border-color: black;
-    box-shadow: none;
-  }
-
-  .lato-text {
-    font-family: Lato;
-  }
-
-  .tenor-text {
-    font-family: Tenor Sans;
-  }
-    
-  </style>
 </head>
 <body>
 
-<nav class="navbar fixed-top bg-light border-bottom bg-white">
-      
+<div class="p-0 m-0 position-relative">
+
+  <nav class="navbar fixed-top py-0 pt-3 px-2 px-md-4 bg-light bg-white">
+    
       
       <!-- Left: Sidebar toggle button -->
       <div class="col d-flex align-items-center">
         <a class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft">
-          <img src="{% static 'lists_24dp_1F1F1F_FILL0_wght100_GRAD-25_opsz24.svg' %}" alt="">
+          <img src="{% static 'lists_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="">
         </a>
       </div>
       
@@ -123,100 +44,113 @@
       <div class="col d-flex text-center justify-content-end align-items-center">
         
         {% if user.is_authenticated %}
-          <a class="btn pe-1" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight">
-            <img src="{% static 'person1.svg' %}" alt="Account">
-          </a>
+        <a class="btn pe-1" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight">
+          <img src="{% static 'person1.svg' %}" alt="Account">
+        </a>
         {% else %}
-          <a id="loginBtn" class="btn text-decoration-none text-dark" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight" data-url="{% url 'user:login' %}">
-            Login
-          </a>
+        <a id="loginBtn" class="btn text-decoration-none text-dark" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight" data-url="{% url 'user:login' %}">
+          Login
+        </a>
         {% endif %}
-
-          <a id="" class="btn ps-0" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight" data-url="{% url 'user:login' %}">
-            <img src="{% static 'shopping_bag.svg' %}" alt="">
-          </a>
+        
+        <a id="" class="btn ps-0" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight" data-url="{% url 'user:login' %}">
+          <img src="{% static 'shopping_bag.svg' %}" alt="">
+        </a>
       </div>
       
+      
+      <hr class="navbar-break mb-0 mt-3 mx-auto">
+    </nav>
+  
 
-</nav>
+    
+    <!-- Sidebar (Offcanvas) Left-->
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasSidebarLabel">
+    
+    <div class="offcanvas-header d-flex flex-row justify-content-between pb-3" style="background-color: black; color: white; padding-top: 3%;">
+      
+      <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+      <button type="button" class="m-0" style="background-color: black; border: none;" data-bs-dismiss="offcanvas" aria-label="Close">
+        <img src="{% static 'close-left.svg' %}" alt="">
+      </button>
 
-<!-- Sidebar (Offcanvas) Left-->
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasSidebarLabel">
-  <div class="offcanvas-header d-flex flex-row justify-content-between pb-3" style="background-color: black; color: white; padding-top: 3%;">
-    <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
-    <button type="button" class="m-0" style="background-color: black; border: none;" data-bs-dismiss="offcanvas" aria-label="Close">
-      <img src="{% static 'close-left.svg' %}" alt="">
-    </button>
-  </div>
-  <div class="offcanvas-body">
-    <h4>Categories</h4>
-    <ul class="list-group list-group-flush">
-      {% for item in category %}
+    </div>
+
+    <div class="offcanvas-body">
+
+      <h4>Categories</h4>
+      <ul class="list-group list-group-flush">
+        {% for item in category %}
         <li class="list-group-item py-1" ><a class="text-decoration-none" href="{% url 'home:category' item.id %}">
           <p class="m-0" style="color: black;">{{ item.name }}</p>
         </a></li>
-      {% endfor %}
-    </ul>
+        {% endfor %}
+      </ul>
+
+    </div>
   </div>
-</div>
 
-<!-- Sidebar (OffcanvasRight) -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" data-form-loaded="false">
-  <div class="offcanvas-header d-flex flex-row justify-content-between pb-3" style="background-color: black; color: white; padding-top: 3%;">
-    <button type="button" class="m-0" style="background-color: black; border: none;" data-bs-dismiss="offcanvas" aria-label="Close">
-      <img src="{% static 'close-right.svg' %}" alt="">
-    </button>
-    <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+  <!-- Sidebar (OffcanvasRight) -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" data-form-loaded="false">
+    <div class="offcanvas-header d-flex flex-row justify-content-between pb-3" style="background-color: black; color: white; padding-top: 3%;">
+      <button type="button" class="m-0" style="background-color: black; border: none;" data-bs-dismiss="offcanvas" aria-label="Close">
+        <img src="{% static 'close-right.svg' %}" alt="">
+      </button>
+    </div>
+    <div class="offcanvas-body" id="form-container">
+      
+    </div>
   </div>
-  <div class="offcanvas-body" id="form-container">
-
-  </div>
-</div>
 
 
 
-{% block content %}
-{% endblock content %}
+  {% block content %}
+  {% endblock content %}
 
-<!-- Footer -->
+  <!-- Footer -->
 
-  <div class="container-fluid lato-text"
-  style="background-color: black;">
+  <div class="container-fluid lato-text" style="background-color: black;">
     <div class="row row-cols-3 p-4 p-md-5 text-light">
       
-    <div class="col footer-text">
-      <p class="mb-2 fw-bold">ABOUT</p>
-      <p class="mb-2 fw-bold">FAQs</p>
-      <p class="mb-2 fw-bold">RETURN / EXCHANGE</p>
-      <p class="mb-2 fw-bold">CONTACT US</p>
-      <p class="mb-2 fw-bold">PRIVACY POLICY</p>  
-    </div>
-
-    <div class="col text-center" >
-      
-      <h6 class="mb-3 footer-text">FOLLOW US </h6>
-      
-      <a href="#"><img class="social-icon me-2" src="{% static 'icons8-facebook.svg' %}" alt="facebook"></a>
-      <a href="#"><img class="social-icon me-2" src="{% static 'icons8-instagram.svg' %}" alt="instagram"></a>
-      <a href="#"><img class="social-icon me-2" src="{% static 'icons8-tiktok.svg' %}" alt="tiktok"></a>
-
-      <div>
-
-        <label for="">Query</label>
-        <input type="text" name="" id="">
+      <div class="col footer-text">
+        <p class="mb-2 fw-bold">ABOUT</p>
+        <p class="mb-2 fw-bold">FAQs</p>
+        <p class="mb-2 fw-bold">RETURN / EXCHANGE</p>
+        <p class="mb-2 fw-bold">CONTACT US</p>
+        <p class="mb-2 fw-bold">PRIVACY POLICY</p>  
       </div>
       
-    </div>
+      <div class="col text-center" >
+        
+        <h6 class="mb-3 footer-text">FOLLOW US </h6>
+        
+        <a href="#"><img class="social-icon me-2" src="{% static 'icons8-facebook.svg' %}" alt="facebook"></a>
+        <a href="#"><img class="social-icon me-2" src="{% static 'icons8-instagram.svg' %}" alt="instagram"></a>
+        <a href="#"><img class="social-icon me-2" src="{% static 'icons8-tiktok.svg' %}" alt="tiktok"></a>
+        
+        <div>
 
-    <div class="col d-flex flex-column align-items-center">
-      <p class="mb-3 footer-text"><b>CUSTOMER SERVICE</b></p>
-      <div class="d-flex flex-column align-items-start w-100" style="max-width: 120px;">
-        <a class="text-light fs-6 fs-md" href="">Email</a>
-        <a class="text-light fs-6 fs-md" href="">Whatsapp</a>
+          <label for="">Query</label>
+          <input type="text" name="" id="">
+        </div>
+        
       </div>
+      
+      <div class="col d-flex flex-column align-items-center">
+        <p class="mb-3 footer-text"><b>CUSTOMER SERVICE</b></p>
+        <div class="d-flex flex-column align-items-start w-100" style="max-width: 120px;">
+            <a class="text-light link fs-6 fs-md" href="">Email</a>
+            <a class="text-light link fs-6 fs-md" href="">Whatsapp</a>
+        </div>
+      </div>
+        
     </div>
-    
   </div>
+
+  <div id="cartPopup" class="cart-popup">
+    Item added to cart
+  </div>
+
 </div>
 
 <script  type="module" src="{% static 'search.js' %}"></script>

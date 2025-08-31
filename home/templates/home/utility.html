@@ -6,14 +6,14 @@
 {% block content %}
 
 <!-- problem in the sub navbar -->
-<div class="container-fluid border-bottom util-container px-5">
+<div class="container-fluid util-container px-2 px-md-5">
 
-    <div class="row  gx-0 gx-md-4 align-items-center py-3 px-2">
+    <div class="row  gx-0 gx-md-4 align-items-center py-5 px-2">
       
     <!-- Left: Filter dropdown -->
     <div class="dropdown col align-items-center order-2 order-md-1">
       <button class="btn btn-sm dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="{% static 'filter_alt_24dp_434343_FILL0_wght400_GRAD0_opsz24.svg' %}" alt="Filter">
+        <img src="{% static 'filter_alt_24dp_000000_FILL0_wght400_GRAD0_opsz24 (1).svg' %}" alt="Filter">
         Filter
       </button>
       <ul class="dropdown-menu" aria-labelledby="filterDropdown">
@@ -24,7 +24,7 @@
     </div>
     
     <!-- Center: Thin text carousel -->
-    <div class="col-12 col-md text-center order-md-2 mt-3 mb-5 mb-md-2">
+    <div class="col-12 col-md text-center order-md-2 mt-3 mb-5 mb-md-2 h5">
       <div id="textCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -45,7 +45,29 @@
       <form class="d-flex ">
         <div class="position-relative">
           <input id="searchInput" class="form-control rounded-pill form-control-sm me-2" data-url="{% url 'home:search' %}" type="search" placeholder="Search" aria-label="Search">
-          <ul id="search-result" class="search-result list-group position-absolute w-100" style="top:100%; z-index:1000;"></ul>
+<ul id="search-result" 
+    class="search-result list-group position-absolute w-100 p-2 bg-white border rounded"
+    style="top:100%; z-index:1000; display:none;">
+  
+  <div class="row">
+    <!-- Left: Categories -->
+    <div class="col-6 border-end pe-3">
+      <h6 class="fw-bold">Categories</h6>
+      <ul class="list-unstyled mb-0" id="category-results">
+        <!-- JS will inject category results here -->
+      </ul>
+    </div>
+    
+    <!-- Right: Dresses -->
+    <div class="col-6 ps-3">
+      <h6 class="fw-bold">Dresses</h6>
+      <ul class="list-unstyled mb-0" id="dress-results">
+        <!-- JS will inject dress results here -->
+      </ul>
+    </div>
+  </div>
+  
+</ul>
         </div>
         <button class="btn btn-sm" type="submit">
           <img src="{% static 'search_24dp_1F1F1F.svg' %}" alt="Search">
@@ -55,6 +77,9 @@
   </div>
 
 </div>
+
+<hr class="w-75 mx-auto">
+
 
 {% block ind %}
 {% endblock ind %}
