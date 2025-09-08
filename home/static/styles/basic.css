@@ -103,6 +103,7 @@ font-family: Tenor-Sans;
 .link{
     text-decoration: none;
     color: black;
+    display: block;
 }
 
 .color-circle{

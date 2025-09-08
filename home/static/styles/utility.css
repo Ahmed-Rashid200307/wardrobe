@@ -1,0 +1,11 @@
+
+.result-container{
+    display: none;
+    top: 130%;
+    right: 0px;
+    z-index: 1000;
+    width: 80vw;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+}
+

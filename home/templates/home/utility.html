@@ -8,7 +8,7 @@
 <!-- problem in the sub navbar -->
 <div class="container-fluid util-container px-2 px-md-5">
 
-    <div class="row  gx-0 gx-md-4 align-items-center py-5 px-2">
+  <div class="row  gx-0 gx-md-4 align-items-center py-5 px-2">
       
     <!-- Left: Filter dropdown -->
     <div class="dropdown col align-items-center order-2 order-md-1">
@@ -42,33 +42,27 @@
     
     <!-- Right: Search box -->
     <div class="col d-flex justify-content-end align-items-center order-3 order-md-3">
-      <form class="d-flex ">
+      <form class="d-flex">
         <div class="position-relative">
-          <input id="searchInput" class="form-control rounded-pill form-control-sm me-2" data-url="{% url 'home:search' %}" type="search" placeholder="Search" aria-label="Search">
-<ul id="search-result" 
-    class="search-result list-group position-absolute w-100 p-2 bg-white border rounded"
-    style="top:100%; z-index:1000; display:none;">
-  
-  <div class="row">
-    <!-- Left: Categories -->
-    <div class="col-6 border-end pe-3">
-      <h6 class="fw-bold">Categories</h6>
-      <ul class="list-unstyled mb-0" id="category-results">
-        <!-- JS will inject category results here -->
-      </ul>
-    </div>
-    
-    <!-- Right: Dresses -->
-    <div class="col-6 ps-3">
-      <h6 class="fw-bold">Dresses</h6>
-      <ul class="list-unstyled mb-0" id="dress-results">
-        <!-- JS will inject dress results here -->
-      </ul>
-    </div>
-  </div>
-  
-</ul>
+          <input id="searchInput"
+                class="form-control rounded-pill form-control-sm me-2"
+                data-url="{% url 'home:search' %}"
+                type="search"
+                placeholder="Search"
+                aria-label="Search">
+
+          <!-- Empty result container; JS will inject types here -->
+          <div id="resultContainer" class="result-container container-fluid position-absolute p-4">
+            <p>Suggestions for you</p>
+            <hr>
+            <div id="searchResult"
+            class="row">
+            </div>
+            
+          </div>
+
         </div>
+
         <button class="btn btn-sm" type="submit">
           <img src="{% static 'search_24dp_1F1F1F.svg' %}" alt="Search">
         </button>

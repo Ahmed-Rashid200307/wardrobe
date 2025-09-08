@@ -1,6 +1,6 @@
 site
 site/lib
-*__pycache__
+__pycache__
 C:/
 static/images/
 db.sqlite3

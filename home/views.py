@@ -52,11 +52,15 @@ def search(request):
 
   if filtered_dress:
     for dress in filtered_dress:
-      jsonObj['dress'].append([dress.name, dress.code])
+      jsonObj['dress'].append(
+        {'name':dress.name, 'code':dress.code, 'price':dress.price, 'image':dress.default_image.url}
+        )
 
   if filtered_categories:
     for category in filtered_categories:
-      jsonObj['categories'].append([category.name, category.code])
+      jsonObj['categories'].append(
+        {'name':category.name, 'code':category.code}
+                                   )
       
   return JsonResponse(jsonObj)
 

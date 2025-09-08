@@ -14,6 +14,7 @@
 
   <link rel="stylesheet" href="{% static 'bsstyles/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'styles/basic.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/utility.css' %}">
   <script src="{% static 'bsstyles/js/bootstrap.bundle.min.js' %}"></script>
 
 
@@ -53,7 +54,7 @@
         </a>
         {% endif %}
         
-        <a id="" class="btn ps-0" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight" data-url="{% url 'user:login' %}">
+        <a id="" class="btn ps-0" type="button" data-bs-toggle="offcanvas"  aria-controls="offcanvasScrolling" data-bs-target="#offcanvasRight">
           <img src="{% static 'shopping_bag.svg' %}" alt="">
         </a>
       </div>
@@ -98,7 +99,29 @@
       </button>
     </div>
     <div class="offcanvas-body" id="form-container">
-      
+      <div class="container">
+        <div class="row row-cols-1 text-center">
+
+            <div class="col mt-2">
+              <h4 class="text-center">Account</h4>
+              <p>Welcome {{user.username}}</p>
+              <hr class="m-3">
+            </div>
+
+            <div class="col text-center">
+              <a class="link" href="">Order History</a>
+              <a class="link" href="">Shipping Addresses</a>
+              <hr class="m-3">
+            </div>
+            
+            
+            <div class="col px-5">
+              <button class="btn w-100 btn-dark rounded-2 bottom-0">
+                <a href="{% url 'user:logout' %}">Logout</a>
+            </div>
+
+        </div>
+      </div>
     </div>
   </div>
 
@@ -109,7 +132,7 @@
 
   <!-- Footer -->
 
-  <div class="container-fluid lato-text" style="background-color: black;">
+  <div class="container-fluid lato-text mt-5" style="background-color: black;">
     <div class="row row-cols-3 p-4 p-md-5 text-light">
       
       <div class="col footer-text">
