@@ -11,6 +11,7 @@ class CartAction(View):
 
 
     def post(self, request):
+        print(request.POST)
 
         if request.user.is_authenticated:
 
@@ -30,7 +31,7 @@ class CartAction(View):
     def add_to_cart(self, req):
 
         valid_ordered_dress = self.validate_product(req.POST)
-        quantity = int(req.POST.get('quantity'))
+        quantity = int(req.POST.get('productQuantity'))
 
         if valid_ordered_dress:
 
@@ -57,10 +58,10 @@ class CartAction(View):
         
     
     def validate_product(self, post):
+        
+        dress = Dress.objects.get(name = post.get('productName'))
 
-        dress = Dress.objects.get(name = post.get('name'))
-
-        if dress.price == int(post.get('price')):
+        if dress.price == int(post.get('productPrice')):
             
             return dress
     

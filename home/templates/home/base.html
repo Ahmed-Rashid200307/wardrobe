@@ -99,7 +99,8 @@
       </button>
     </div>
     <div class="offcanvas-body" id="form-container">
-      <div class="container">
+
+      <div class="container" style="display: none;">
         <div class="row row-cols-1 text-center">
 
             <div class="col mt-2">
@@ -109,19 +110,31 @@
             </div>
 
             <div class="col text-center">
-              <a class="link" href="">Order History</a>
-              <a class="link" href="">Shipping Addresses</a>
+              <a class="link pb-1  text-black" href="">Order History</a>
+              <a class="link  text-black" href="">Shipping Addresses</a>
               <hr class="m-3">
             </div>
             
             
             <div class="col px-5">
               <button class="btn w-100 btn-dark rounded-2 bottom-0">
-                <a href="{% url 'user:logout' %}">Logout</a>
+                <a class="link text-white" href="{% url 'user:logout' %}">Logout</a>
             </div>
 
         </div>
       </div>
+
+      <div class="container-fluid">
+        <div id="cartContainer" class="row row-cols-1">
+          <div class="col mb-4">
+            <h4>Cart</h4>
+          </div>
+
+
+
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -178,6 +191,7 @@
 
 <script  type="module" src="{% static 'search.js' %}"></script>
 <script type="module" src="{% static 'login.js' %}"></script>
+<script type="module" src='{% static "validate.js" %}'></script>
 
 </body>
 </html>

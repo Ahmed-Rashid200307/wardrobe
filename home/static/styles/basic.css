@@ -1,3 +1,12 @@
+html{
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+body{
+margin-top: 75px;
+font-family: Tenor-Sans;
+}
 
 .cart-popup{
 display: inline;
@@ -18,9 +27,12 @@ text-align: center;
 transition: all 0.7s ease-in-out;
 }
 
-body{
-margin-top: 75px;
-font-family: Tenor-Sans;
+.text-white{
+    color: white;
+}
+
+.text-black{
+    color: black;
 }
 
 .bg-white{
@@ -102,7 +114,6 @@ font-family: Tenor-Sans;
 
 .link{
     text-decoration: none;
-    color: black;
     display: block;
 }
 

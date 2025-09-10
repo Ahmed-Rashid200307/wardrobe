@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.views.generic import View,FormView
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from .forms import Loginform 
 # Create your views here.
 
@@ -25,5 +25,9 @@ def account(request):
   return render(request, 'registration/account.html')
 
 class LoginView(LoginView):
+  form_class = Loginform
+  next_page = '/' 
+
+class LogoutView(LogoutView):
   form_class = Loginform
   next_page = '/' 
