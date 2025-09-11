@@ -1,11 +1,10 @@
-import {cart } from './cart.js'
-const customerCart = new cart('wardrobeCart');
-customerCart.loadFromStorage();
+import customerCart  from './cart.js'
+import { cartContainer } from './main.js';
 
 const cartBtn = document.getElementById('cartBtn');
 const form = document.getElementById('cartForm');
 const cartPopup = document.getElementById('cartPopup');
-const cartContainer = document.getElementById('cartContainer');
+
 
 function showAddedPopup(){
 
@@ -16,28 +15,6 @@ function showAddedPopup(){
     }, 4000)
     
 }
-
-// function addProductToSideBar(){
-    
-//     let cartContainer = document.getElementById('cartContainer');
-    
-//     cartContainer.innerHTML += `
-//         <div id="itemContainer" class="col">
-//             <div class="row row-cols-3">
-//               <div class="col px-4 pb-4">
-//                 <img class="image-fluid w-75" id="itemImage" src="/static/images/${cart.get('productColor')}" alt="">
-//               </div>
-//               <div class="col">
-//                 <p id="itemName">${cart.get('productName')}</p>
-//               </div>
-//               <div class="col">
-//                 <p id="Quantity">${cart.get('productQuantity')}</p>
-//               </div>
-//             </div>
-//         </div>
-//     `
-
-// }
 
 async function sendCartInfo() {
 
@@ -52,7 +29,7 @@ async function sendCartInfo() {
 
     if(data.success){
         customerCart.saveItem(formData);
-        customerCart.addProductToElement(cartContainer);
+        customerCart.renderProducts(cartContainer);
         showAddedPopup();
     }
     else{
@@ -66,4 +43,3 @@ async function sendCartInfo() {
 }
 
 cartBtn.addEventListener('click',sendCartInfo)
-customerCart.addProductToElement(cartContainer);

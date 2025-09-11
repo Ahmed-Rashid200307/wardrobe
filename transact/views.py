@@ -11,7 +11,6 @@ class CartAction(View):
 
 
     def post(self, request):
-        print(request.POST)
 
         if request.user.is_authenticated:
 

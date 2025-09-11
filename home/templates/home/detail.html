@@ -6,14 +6,14 @@
 {% block content %}
 
 
-<div>
+<div class="container">
 
-    <div class="row w-100 row-cols-1 row-cols-md-2 g-0 g-md-5 p-0 p-md-5">
+    <div class="row row-cols-1 row-cols-md-2 g-0 g-md-5 p-0 p-md-5">
         
         <div class="col" id="product-col">
             
             <div id="productCarousel" class="carousel slide carousel-fade" data-ride="carousel">
-                <div class="carousel-inner rounded-1">
+                <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img class="object-fit-cover" src="{% static 'images' %}{{product.default_image.url}}" alt="First slide">
                     </div>
@@ -29,82 +29,91 @@
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         
-    </div>
+        </div>
 
         <!-- add varient code -->
         <!-- send data with js or use a form with hidden input values -->
         
-    <div class="col ps-4 pe-1 p-md-4" id="latoText">
+        <div class="col ps-4 ps-md-5" id="latoText">
             <form id="cartForm" action="/cart" method="post">
 
-            {% csrf_token %}
-              
-            <a href="" id="productCode">{{code}}/{{product.code}}</a>
-            <input type="text" name="code" id="productCode" value={{code}}/{{product.code}} hidden>
-              
-            <div class="my-4">
-                <h1 class="tenor-text" id="productName">{{product.name}}</h1>
-                <input type="text" name="productName" id="inputName" value="{{product.name}}" hidden>
-                <h5 id="productPrice">RS {{product.price}}</h5>
-                <input type="text" name="productPrice" id="inputPrice" value={{product.price}} hidden>
-            </div>
+                {% csrf_token %}
                 
-            <div class="mb-4">
-                <h5 id="productVariant">Colors</h5>
-                <div class="row w-50">
+                <a href="" id="productCode" class="link text-black text-2">{{code}}/{{product.code}}</a>
+                <input type="text" name="code" id="productCode" value={{code}}/{{product.code}} hidden>
+                
+                <div class="my-4">
+                    <h1 class="tenor-text" id="productName">{{product.name}}</h1>
+                    <input type="text" name="productName" id="inputName" value="{{product.name}}" hidden>
+                    <h5 id="productPrice">RS {{product.price}}</h5>
+                    <input type="text" name="productPrice" id="inputPrice" value={{product.price}} hidden>
+                </div>
+                    
+                <div class="mb-4">
+                    <h5 id="productVariant">Colors</h5>
+                    <div class="row w-50">
 
-                    <div class="col">
-                        <label>
-                            <img class="object-fit-cover" src="{% static 'images' %}{{product.default_image.url}}" alt="Second slide">
-                            <input type="radio" name="productColor" value="{{product.default_image.name}}" id="inputColor" hidden checked>
-                        </label>
+                        <div class="col">
+                            <label>
+                                <img class="object-fit-cover" src="{% static 'images' %}{{product.default_image.url}}" alt="Second slide">
+                                <input type="radio" name="productColor" value="{{product.default_image.name}}" id="inputColor" hidden checked>
+                            </label>
+                        </div>
+                        
+                        {% for var in variant %}
+                        <div class="col">
+                            <label>
+                                <img class="object-fit-cover" src="{% static 'images' %}{{var.image.url}}" alt="Second slide">
+                                <input type="radio" name="productColor" value="{{var.image.url}}" id="inputColor" hidden>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                    
+                <div class="mb-4">
+                    <label for="size-options"><h5>Size</h5></label>
+                    <div class="mt-2">
+                        {% for size in sizes %}
+                        <input type="radio" class="btn-check border-end" value="{{size}}" name="productSize" id="option{{size}}" autocomplete="off" checked>
+                        <label class="btn rounded-0" for="option{{size}}">{{size}}</label>
+                        {% endfor %}
                     </div>
                     
-                    {% for var in variant %}
-                    <div class="col">
-                        <label>
-                            <img class="object-fit-cover" src="{% static 'images' %}{{var.image.url}}" alt="Second slide">
-                            <input type="radio" name="productColor" value="{{var.image.url}}" id="inputColor" hidden>
-                        </label>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-                
-            <div class="mb-4">
-                <label for="size-options"><h5>Size</h5></label>
-                <div class="mt-2">
-                    {% for size in sizes %}
-                    <input type="radio" class="btn-check border-end" value="{{size}}" name="productSize" id="option{{size}}" autocomplete="off" checked>
-                    <label class="btn rounded-0" for="option{{size}}">{{size}}</label>
-                    {% endfor %}
                 </div>
                 
-            </div>
-            
-            <div class="mb-4">
-                <label class="mb-2" for="quantity"><h5>Quantity</h5></label>
-                <input class="d-block" type="number" max="5" min="1"value="1" name="productQuantity" id="inputQuantity">
-            </div>
-            
-            
-            
-            </div>
-        </form>
-
-        <div class="d-flex justify-content-center mb-4">
-            <button type="button" class="w-50 py-2" id="cartBtn" style="background-color: black; color: white;"><h3 class="m-0">Add To Cart</h3></button>
+                <div class="mb-4">
+                    <label class="mb-2" for="quantity"><h5>Quantity</h5></label>
+                    <input class="d-block" type="number" max="5" min="1"value="1" name="productQuantity" id="inputQuantity">
+                </div>
+                
+                
+                
+            </form>
         </div>
         
-        <h5>Product Details</h5>
-        <p>{{product.description}}</p>
-    
-    </div>
+        <div class="col">
+        </div>
+
+        <div class="col mt-0 ps-4 ps-md-5">
+
+            <div class="d-flex justify-content-center mb-4">
+                <button type="button" class="w-50 py-2" id="cartBtn" style="background-color: black; color: white;"><h3 class="m-0">Add To Cart</h3></button>
+            </div>
+            
+            <h5>Product Details</h5>
+            <p>{{product.description}}</p>
+        </div>
+        </div>
+
 </div>
+
+
+<script type="module" src='{% static "validate.js" %}'></script>
 
 {% endblock content %}

@@ -18,13 +18,14 @@ export class cart {
 
     saveItem(item){
         let name = item.get('productName')
+        let color = item.get('productColor')
 
         if(this.cartItems.length == 0){
 
             this.cartItems.push({
                 name: item.get('productName'),
                 color: item.get('productColor'),
-                quantity: item.get('productQuantity'),
+                quantity: Number(item.get('productQuantity')),
                 price: item.get('productPrice'),
                 size: item.get('productSize')
             });
@@ -32,14 +33,14 @@ export class cart {
 
             this.cartItems.forEach(product=>{
             
-                if(name == product.name){
-                    product.quantity += item.get('productQuantity')
+                if(name == product.name && color == product.color){
+                    product.quantity += Number(item.get('productQuantity'));
                 }else{
 
                     this.cartItems.push({
                         name: item.get('productName'),
                         color: item.get('productColor'),
-                        quantity: item.get('productQuantity'),
+                        quantity: Number(item.get('productQuantity')),
                         price: item.get('productPrice'),
                         size: item.get('productSize')
                     });
@@ -53,7 +54,7 @@ export class cart {
         localStorage.setItem(this.#key, JSON.stringify(this.cartItems));
     }
 
-    addProductToElement(container){
+    renderProducts(container){
     
         let html = '';
     
@@ -61,23 +62,37 @@ export class cart {
 
             html += `
                 <div id="itemContainer" class="col">
-                    <div class="row row-cols-3">
-                    <div class="col px-4 pb-4">
-                        <img class="image-fluid w-75" id="itemImage" src="/static/images/${item.color}" alt="">
-                    </div>
-                    <div class="col">
-                        <p id="itemName">${item.name}</p>
-                    </div>
-                    <div class="col">
-                        <p id="Quantity">${item.quantity}</p>
-                    </div>
+                    <div class="row">
+                        <div class="col-3 py-2">
+                            <img class="image-fluid w-100" id="itemImage" src="/static/images/${item.color}" alt="">
+                        </div>
+
+                        <div class="col-8">
+                        <div class="row row-cols-1 py-2">
+                            <div class="col mb-4">
+                                <p id="itemName">${item.name}</p>
+                            </div>
+                            <div class="col">
+                                <p id="Quantity">${item.quantity}X</p>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="col-1 p-0 align-items-end">
+                            <img src="/static/delete.svg" alt="">
+                        </div>
                     </div>
                 </div>
             `
         })
 
-        container.innerHTML += html;
+        container.innerHTML = html;
 
     }
 
 }
+
+const customerCart = new cart('wardrobeCart');
+customerCart.loadFromStorage();
+
+export default customerCart;

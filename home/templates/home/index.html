@@ -10,7 +10,7 @@
       {% for dress in dresses %}
 
       <div class="col p-2 p-md-3 mb-3 font-1">
-        <a href="home/product?code={{ dress.code }}" class="link">
+        <a href="home/product?code={{ dress.code }}" class="link text-black">
           <div class="all-img-height mb-3">
             <img src="{% static 'images' %}{{dress.default_image.url}}"  loading="lazy" class="dress-all object-fit-cover" alt="Dress">
           </div>

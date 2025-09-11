@@ -6,6 +6,7 @@ html{
 body{
 margin-top: 75px;
 font-family: Tenor-Sans;
+font-size: 14px;
 }
 
 .cart-popup{
@@ -33,6 +34,14 @@ transition: all 0.7s ease-in-out;
 
 .text-black{
     color: black;
+}
+
+.text-2{
+    font-size: 1.2rem;
+}
+
+.text-4{
+    font-size: 4rem;
 }
 
 .bg-white{
@@ -68,10 +77,6 @@ width: 4vw;
 height: 4vw;
 }
 @media screen and (max-width: 768px) {
-
-.footer-text {
-    font-size: 0.8rem;
-}
 
 #product-col{
     padding: 5%;
@@ -128,6 +133,3 @@ font-family: Tenor-Sans;
     opacity: 0.8;
 }
 
-.product-meta{
-    font-size: 14px;
-}

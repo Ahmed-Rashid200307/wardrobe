@@ -36,8 +36,8 @@
       
       <!-- Center: Logo -->
       <div class="col d-flex justify-content-center align-items-center">  
-        <a class="text-decoration-none text-dark fs-3"  href="{% url 'home:index' %}">
-          <b>WARDROBE</b>
+        <a class="text-decoration-none text-dark"  href="{% url 'home:index' %}">
+          <h2>WARDROBE</h2>
         </a>
       </div>
       
@@ -125,11 +125,8 @@
       </div>
 
       <div class="container-fluid">
+        <h4>Cart</h4>
         <div id="cartContainer" class="row row-cols-1">
-          <div class="col mb-4">
-            <h4>Cart</h4>
-          </div>
-
 
 
         </div>
@@ -175,8 +172,8 @@
       <div class="col d-flex flex-column align-items-center">
         <p class="mb-3 footer-text"><b>CUSTOMER SERVICE</b></p>
         <div class="d-flex flex-column align-items-start w-100" style="max-width: 120px;">
-            <a class="text-light link fs-6 fs-md" href="">Email</a>
-            <a class="text-light link fs-6 fs-md" href="">Whatsapp</a>
+            <a class="text-light link" href="">Email</a>
+            <a class="text-light link" href="">Whatsapp</a>
         </div>
       </div>
         
@@ -189,9 +186,8 @@
 
 </div>
 
-<script  type="module" src="{% static 'search.js' %}"></script>
+<script type="module" src='{% static "main.js" %}'></script>
 <script type="module" src="{% static 'login.js' %}"></script>
-<script type="module" src='{% static "validate.js" %}'></script>
 
 </body>
 </html>
