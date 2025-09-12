@@ -44,67 +44,76 @@
 
                 {% csrf_token %}
                 
-                <a href="" id="productCode" class="link text-black text-2">{{code}}/{{product.code}}</a>
-                <input type="text" name="code" id="productCode" value={{code}}/{{product.code}} hidden>
                 
                 <div class="my-4">
-                    <h1 class="tenor-text" id="productName">{{product.name}}</h1>
+                    <label for="inputName">
+                        <h4 class="m-0">{{product.name}}</h4>
+                    </label>
                     <input type="text" name="productName" id="inputName" value="{{product.name}}" hidden>
-                    <h5 id="productPrice">RS {{product.price}}</h5>
+                    <a href="" id="productCode" class="link">
+                        <span class="text-black text-12">{{code}}/{{product.code}}</span>
+                    </a>
+                    <input type="text" name="code" id="productCode" value={{code}}/{{product.code}} hidden>
+                </div>
+
+                <div>
+                    <label for="inputPrice">
+                        <h4>RS {{product.price}}</h4>
+                    </label>
                     <input type="text" name="productPrice" id="inputPrice" value={{product.price}} hidden>
                 </div>
                     
-                <div class="mb-4">
-                    <h5 id="productVariant">Colors</h5>
-                    <div class="row w-50">
+                <div class="d-inline-flex h-25">
+                    <span class="align-self-center">Colors</span>
 
-                        <div class="col">
-                            <label>
-                                <img class="object-fit-cover" src="{% static 'images' %}{{product.default_image.url}}" alt="Second slide">
-                                <input type="radio" name="productColor" value="{{product.default_image.name}}" id="inputColor" hidden checked>
-                            </label>
-                        </div>
-                        
-                        {% for var in variant %}
-                        <div class="col">
-                            <label>
-                                <img class="object-fit-cover" src="{% static 'images' %}{{var.image.url}}" alt="Second slide">
-                                <input type="radio" name="productColor" value="{{var.image.url}}" id="inputColor" hidden>
-                            </label>
-                        </div>
-                        {% endfor %}
+                    <div class="w-25 p-4">
+                        <label for="{{product.default_image.name}}">
+                            <img class="image-fluid w-100" src="{% static 'images' %}{{product.default_image.url}}" alt="Second slide">
+                            <input type="radio" name="productColor" value="{{product.default_image.name}}" id="{{product.default_image.name}}" hidden checked>
+                        </label>
                     </div>
+                    
+                    {% for var in variant %}
+                    <div class="w-25 p-4">
+                        <label for="{{product.default_image.name}}">
+                            <img class="image-fluid w-100" src="{% static 'images' %}{{var.image.url}}" alt="Second slide">
+                            <input type="radio" name="productColor" value="{{var.image.url}}" id="{{product.default_image.name}}" hidden>
+                        </label>
+                    </div>
+                    {% endfor %}
                 </div>
                     
-                <div class="mb-4">
-                    <label for="size-options"><h5>Size</h5></label>
-                    <div class="mt-2">
+                <div class="">
+                    <label for="size-options"><span>Size</span></label>
+                    <div class="">
                         {% for size in sizes %}
                         <input type="radio" class="btn-check border-end" value="{{size}}" name="productSize" id="option{{size}}" autocomplete="off" checked>
-                        <label class="btn rounded-0" for="option{{size}}">{{size}}</label>
+                        <label class="btn" for="option{{size}}">{{size}}</label>
                         {% endfor %}
                     </div>
                     
                 </div>
                 
-                <div class="mb-4">
-                    <label class="mb-2" for="quantity"><h5>Quantity</h5></label>
+                <div class="">
+                    <label class="" for="quantity"><span>Quantity</span></label>
                     <input class="d-block" type="number" max="5" min="1"value="1" name="productQuantity" id="inputQuantity">
                 </div>
                 
                 
                 
             </form>
+
+            <div class="d-flex justify-content-center">
+                <button type="button" class="w-50" id="cartBtn" style="background-color: black; color: white;"><span>Add To Cart</span></button>
+            </div>
+            <hr>
         </div>
         
         <div class="col">
         </div>
 
-        <div class="col mt-0 ps-4 ps-md-5">
 
-            <div class="d-flex justify-content-center mb-4">
-                <button type="button" class="w-50 py-2" id="cartBtn" style="background-color: black; color: white;"><h3 class="m-0">Add To Cart</h3></button>
-            </div>
+        <div class="col">
             
             <h5>Product Details</h5>
             <p>{{product.description}}</p>
